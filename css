@@ -4,7 +4,7 @@
   --cw-dark-2: #2b2b2b;
 }
 
-:root{
+/* :root{
   --bg:#0b1220;
   --panel:#0f1a2d;
   --panel-2:#0c1526;
@@ -16,7 +16,7 @@
   --shadow: 0 18px 60px rgba(0,0,0,.35);
   --radius: 16px;
   --container: 1100px;
-}
+} */
 
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
