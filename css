@@ -18,6 +18,44 @@
   --container: 1100px;
 } */
 
+/* NAVBAR */
+.navbar {
+  background-color: var(--cw-dark) !important;
+}
+
+/* HERO */
+.hero {
+  background-color: var(--cw-orange);
+  color: #ffffff;
+}
+
+/* SECTION BACKGROUNDS */
+.bg-brand {
+  background-color: var(--cw-orange);
+}
+
+.bg-dark-brand {
+  background-color: var(--cw-dark);
+  color: #ffffff;
+}
+
+/* BUTTONS */
+.btn-primary {
+  --bs-btn-bg: var(--cw-orange);
+  --bs-btn-border-color: var(--cw-orange);
+  --bs-btn-hover-bg: #e67600;
+  --bs-btn-hover-border-color: #e67600;
+  --bs-btn-active-bg: #cc6a00;
+  --bs-btn-active-border-color: #cc6a00;
+}
+
+/* PILLS / BADGES */
+.pill {
+  background-color: rgba(255,130,0,.12);
+  border: 1px solid rgba(255,130,0,.35);
+  color: #000;
+}
+
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
