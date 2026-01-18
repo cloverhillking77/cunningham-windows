@@ -17,6 +17,7 @@ body{
 /* Logo */
 .cw-logo{
   height:75px;
+  max-height:75px;
   width:auto;
   display:block;
 }
