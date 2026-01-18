@@ -6,103 +6,67 @@
   <title>Cunningham Windows | Knoxville, TN</title>
   <meta name="description" content="Windows, siding, sunrooms, glass service, carports and more. Call (865) 522-0800." />
 
-  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Optional icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
-  :root{
-    --cw-orange:#FF8200;
-    --cw-dark:#1f1f1f;
-  }
-
-  body{ background:#f6f7f9; }
-
-  /* Navbar */
-  .navbar{ background-color: #ffffff !important; }
-
-  /* SVG logo size */
-  .cw-logo{
-    height:100px;
-    width:auto;
-    display:block;
-  }
-
-  /* Hero = solid brand orange */
-  .hero{
-    background: var(--cw-orange);
-    color:#fff;
-  }
-
-  /* Keep your glass look on orange */
-  .glass{
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.22);
-    backdrop-filter: blur(10px);
-  }
-
-  .card-hover{
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .card-hover:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.15);
-  }
-
-  /* Orange pills */
-  .pill{
-    border: 1px solid rgba(255,130,0,.35);
-    background: rgba(255,130,0,.12);
-    border-radius: 999px;
-    padding: .35rem .7rem;
-    display: inline-block;
-    margin: .25rem .35rem 0 0;
-    font-size: .95rem;
-  }
-
-  /* Make primary button orange too */
-  .btn-primary{
-    --bs-btn-bg: var(--cw-orange);
-    --bs-btn-border-color: var(--cw-orange);
-    --bs-btn-hover-bg: #e67600;
-    --bs-btn-hover-border-color: #e67600;
-    --bs-btn-active-bg: #cc6a00;
-    --bs-btn-active-border-color: #cc6a00;
-  }
-
-  footer a{ text-decoration:none; }
-  footer a:hover{ text-decoration:underline; }
-</style>
-
+    .hero {
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(13,110,253,.25), transparent 60%),
+        radial-gradient(800px 520px at 85% 10%, rgba(25,135,84,.18), transparent 55%),
+        #0b1220;
+      color: #fff;
+    }
+    .glass {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+    }
+    .card-hover { transition: transform .15s ease, box-shadow .15s ease; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 1rem 2rem rgba(0,0,0,.15); }
+    .pill {
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(13,110,253,.06);
+      border-radius: 999px;
+      padding: .35rem .7rem;
+      display: inline-block;
+      margin: .25rem .35rem 0 0;
+      font-size: .95rem;
+    }
+    footer a { text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
 </head>
 
 <body>
-  <!-- Top bar / Navbar -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
     <div class="container">
-  <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold" href="#home">
-  <img src="/images/image000000.png" class="cw-logo" alt="Cunningham Windows">
-</a>
+      <a class="navbar-brand fw-semibold" href="#home">
+        <span class="me-2 d-inline-block rounded-3" style="width:28px;height:28px;background:linear-gradient(135deg,#0d6efd,#20c997);"></span>
+        Cunningham Windows
+      </a>
 
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"> 
-        <span class="navbar-toggler-icon"></span> </button> 
-      <div id="nav" class="collapse navbar-collapse"> 
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1"> 
-          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li> 
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+
           <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-    Services
-  </a>
-  <ul class="dropdown-menu dropdown-menu-dark">
-    <li><a class="dropdown-item" href="#windows">Windows</a></li>
-    <li><a class="dropdown-item" href="#sunrooms">Sunrooms</a></li>
-    <li><a class="dropdown-item" href="#glass">Glass Service</a></li>
-    <li><a class="dropdown-item" href="#carports">Carports</a></li>
-  </ul>
-</li>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#windows">Windows</a></li>
+              <li><a class="dropdown-item" href="#sunrooms">Sunrooms</a></li>
+              <li><a class="dropdown-item" href="#glass">Glass Service</a></li>
+              <li><a class="dropdown-item" href="#carports">Carports</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 
           <li class="nav-item ms-lg-2">
             <a class="btn btn-primary btn-sm" href="tel:+18655220800">
@@ -120,7 +84,7 @@
       <div class="row g-4 align-items-center">
         <div class="col-lg-7">
           <p class="text-uppercase text-white-50 mb-2">Serving East Tennessee</p>
-          <h1 class="display-5 fw-bold mb-3">Windows, Sunrooms, Glass Service &amp; More</h1>
+          <h1 class="display-5 fw-bold mb-3">Windows, Siding, Sunrooms, Glass Service &amp; More</h1>
           <p class="lead text-white-75 mb-4">
             Emergency text line: text <span class="fw-semibold">“25%”</span> for a $25 discount on first-time service call.
           </p>
@@ -128,11 +92,8 @@
             <a class="btn btn-success btn-lg" href="tel:+18655220800">
               <i class="bi bi-telephone me-1"></i> Call Now
             </a>
-            <a class="btn btn-outline-light btn-lg" href="#contact">
-              Get a Free Quote
-            </a>
+            <a class="btn btn-outline-light btn-lg" href="#contact">Get a Free Quote</a>
           </div>
-
           <div class="mt-4 small text-white-50">
             <i class="bi bi-geo-alt me-1"></i> Knoxville, TN • (865) 522-0800
           </div>
@@ -143,7 +104,8 @@
             <h2 class="h5 fw-semibold mb-3">Our Services</h2>
             <div class="row g-2">
               <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#windows">Window Installation &amp; Repairs</a></div>
-              <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#sunrooms">Sunrooms Windows &amp; Repair</a></div>
+              <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#sunrooms">Sunrooms Construction &amp; Repair</a></div>
+              <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#carports">Carport Construction</a></div>
               <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#glass">Glass Replacement</a></div>
             </div>
           </div>
@@ -152,163 +114,50 @@
     </div>
   </header>
 
-  <!-- What we do -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <h2 class="fw-bold">What we do</h2>
-          <p class="text-body-secondary">
-            Free estimates, licensed sales, service, glass repairs, insulated glass, screens &amp; screen repairs,
-            doors (sliding/patio/french), window parts (springs/balances), sunrooms/screen rooms, and more.
-          </p>
-          <div class="d-flex gap-2 flex-wrap">
-            <span class="badge text-bg-primary">Free Estimates</span>
-            <span class="badge text-bg-success">Repair &amp; Replace</span>
-            <span class="badge text-bg-dark">Local • Family Owned</span>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="card card-hover h-100">
-                <div class="card-body">
-                  <div class="fw-semibold mb-1"><i class="bi bi-house me-2"></i>Residential</div>
-                  <div class="text-body-secondary">Homes, condos, apartments, and upgrades.</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card card-hover h-100">
-                <div class="card-body">
-                  <div class="fw-semibold mb-1"><i class="bi bi-building me-2"></i>Commercial</div>
-                  <div class="text-body-secondary">Storefront, office, and property maintenance.</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card card-hover h-100">
-                <div class="card-body">
-                  <div class="fw-semibold mb-1"><i class="bi bi-tools me-2"></i>Repairs</div>
-                  <div class="text-body-secondary">Balances, locks, screens, fogged insulated glass.</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="card card-hover h-100">
-                <div class="card-body">
-                  <div class="fw-semibold mb-1"><i class="bi bi-lightning me-2"></i>Energy</div>
-                  <div class="text-body-secondary">Ask about qualifying Energy Star rebates.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Services section anchors -->
+  <!-- Services -->
   <section id="windows" class="py-5 bg-body-tertiary">
     <div class="container">
       <h2 class="fw-bold">Windows</h2>
-      <p class="text-body-secondary">Add details about window brands, warranties, and repair services here.</p>
+      <p class="text-body-secondary">Add your window install/repair details here.</p>
     </div>
   </section>
 
   <section id="sunrooms" class="py-5">
     <div class="container">
       <h2 class="fw-bold">Sunrooms</h2>
-      <p class="text-body-secondary">Add sunroom construction &amp; repair details, materials, and examples.</p>
+      <p class="text-body-secondary">Add sunroom construction &amp; repair details here.</p>
     </div>
   </section>
 
   <section id="glass" class="py-5 bg-body-tertiary">
     <div class="container">
       <h2 class="fw-bold">Glass Service</h2>
-      <p class="text-body-secondary">Insulated glass, fogged window fixes, tempered glass, screens, and more.</p>
+      <p class="text-body-secondary">Insulated glass, screens, replacements, and more.</p>
     </div>
   </section>
 
   <section id="carports" class="py-5">
     <div class="container">
       <h2 class="fw-bold">Carports</h2>
-      <p class="text-body-secondary">Add carport options, sizes, and installation notes.</p>
+      <p class="text-body-secondary">Add carport options and installation notes here.</p>
     </div>
   </section>
 
-  <!-- Areas served -->
-  <section class="py-5 bg-body-tertiary">
-    <div class="container">
-      <h2 class="fw-bold">Service Areas</h2>
-
-      <div class="mt-3">
-        <div class="fw-semibold mb-2">Counties serviced</div>
-        <div>
-          <span class="pill">Anderson</span><span class="pill">Blount</span><span class="pill">Campbell</span>
-          <span class="pill">Greene</span><span class="pill">Hawkins</span><span class="pill">Jefferson</span>
-          <span class="pill">Knox</span><span class="pill">Roane</span><span class="pill">Sevier</span>
-          <span class="pill">Union</span><span class="pill">…and surrounding areas</span>
-        </div>
-      </div>
-
-      <div class="mt-4">
-        <div class="fw-semibold mb-2">Cities sold and serviced</div>
-        <div>
-          <span class="pill">Knoxville</span><span class="pill">Maryville</span><span class="pill">Oak Ridge</span>
-          <span class="pill">Sevierville</span><span class="pill">Morristown</span><span class="pill">Clinton</span>
-          <span class="pill">Powell</span><span class="pill">Newport</span><span class="pill">…and more</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- References / Projects placeholders -->
-  <section id="references" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold">References</h2>
-      <p class="text-body-secondary">Add testimonials/reviews here.</p>
-    </div>
-  </section>
-
-  <section id="projects" class="py-5 bg-body-tertiary">
-    <div class="container">
-      <h2 class="fw-bold">Projects</h2>
-      <p class="text-body-secondary"><img src="/images/test.jpg.heic" class="cw-logo" alt="Cunningham Windows" </p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-5">
+  <!-- Contact (AJAX -> /api/contact) -->
+  <section id="contact" class="py-5 bg-body-tertiary">
     <div class="container">
       <div class="row g-4 align-items-start">
         <div class="col-lg-5">
-          <h2 class="fw-bold">Call for a free quote</h2>
-          <p class="text-body-secondary mb-3">
-            Knoxville, TN • Serving East Tennessee
-          </p>
+          <h2 class="fw-bold">Request an estimate</h2>
+          <p class="text-body-secondary mb-3">We’ll email you back quickly.</p>
 
           <div class="card">
             <div class="card-body">
-              <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-geo-alt fs-4"></i>
-                <div>
-                  <div class="fw-semibold">Address</div>
-                  <div class="text-body-secondary">9514 Gibbs Rd Corryton, TN 37721</div>
-                </div>
-              </div>
-
+              <div class="fw-semibold mb-1">Phone</div>
+              <a class="text-decoration-none" href="tel:+18655220800">(865) 522-0800</a>
               <hr>
-
-              <div class="d-flex align-items-start gap-3">
-                <i class="bi bi-telephone fs-4"></i>
-                <div>
-                  <div class="fw-semibold">Phone</div>
-                  <a class="text-decoration-none" href="tel:+18655220800">(865) 522-0800</a>
-                </div>
-              </div>
+              <div class="fw-semibold mb-1">Address</div>
+              <div class="text-body-secondary">800 E Magnolia Ave<br>Knoxville, TN 37917</div>
             </div>
           </div>
         </div>
@@ -316,60 +165,45 @@
         <div class="col-lg-7">
           <div class="card shadow-sm">
             <div class="card-body p-4">
-              <h3 class="h5 fw-semibold mb-3">Request an estimate</h3>
+              <div id="alert" class="alert d-none" role="alert"></div>
 
-              <!-- Formspree endpoint (recommended) -->
-              <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label class="form-label">Name</label>
-                    <input class="form-control" name="name" autocomplete="name" required>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Phone</label>
-                    <input class="form-control" name="phone" autocomplete="tel" required>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input class="form-control" type="email" name="email" autocomplete="email">
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Service Needed</label>
-                    <select class="form-select" name="service">
-                      <option>Windows</option>
-                      <option>Glass Service</option>
-                      <option>Sunrooms</option>
-                      <option>Carports</option>
-                      <option>Siding</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-control" name="message" rows="5" placeholder="Tell us what you need…"></textarea>
-                  </div>
-
-                  <!-- Optional: redirect after submit -->
-                  <input type="hidden" name="_subject" value="New website quote request">
-                  <input type="hidden" name="_redirect" value="https://YOURDOMAIN.com/thanks.html">
-
-                  <div class="col-12 d-flex gap-2 flex-wrap">
-                    <button class="btn btn-primary btn-lg" type="submit">
-                      <i class="bi bi-send me-1"></i> Send Request
-                    </button>
-                    <a class="btn btn-outline-secondary btn-lg" href="tel:+18655220800">
-                      <i class="bi bi-telephone me-1"></i> Prefer to call
-                    </a>
-                  </div>
+              <form id="contactForm" class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name</label>
+                  <input class="form-control" name="name" autocomplete="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Phone</label>
+                  <input class="form-control" name="phone" autocomplete="tel" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="email" name="email" autocomplete="email">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Service Needed</label>
+                  <select class="form-select" name="service">
+                    <option>Windows</option>
+                    <option>Glass Service</option>
+                    <option>Sunrooms</option>
+                    <option>Carports</option>
+                    <option>Siding</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message</label>
+                  <textarea class="form-control" name="message" rows="5" placeholder="Tell us what you need…"></textarea>
+                </div>
+                <div class="col-12 d-flex gap-2 flex-wrap">
+                  <button id="submitBtn" class="btn btn-primary btn-lg" type="submit">
+                    <i class="bi bi-send me-1"></i> Send
+                  </button>
                 </div>
               </form>
 
               <p class="small text-body-secondary mt-3 mb-0">
-                Tip: if you host on GitHub Pages, Formspree is the easiest email delivery.
+                Form submits to a Cloudflare Pages Function at <code>/api/contact</code>.
               </p>
             </div>
           </div>
@@ -394,6 +228,45 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("contactForm");
+    const alertBox = document.getElementById("alert");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function showAlert(type, msg) {
+      alertBox.className = `alert alert-${type}`;
+      alertBox.textContent = msg;
+      alertBox.classList.remove("d-none");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      alertBox.classList.add("d-none");
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const out = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(out?.error || "Failed to send.");
+
+        form.reset();
+        showAlert("success", "Thanks! Your request was sent. We’ll get back to you soon.");
+      } catch (err) {
+        showAlert("danger", err.message || "Something went wrong.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="bi bi-send me-1"></i> Send';
+      }
+    });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
