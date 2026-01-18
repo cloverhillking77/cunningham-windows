@@ -11,12 +11,12 @@ body{
 
 /* NAVBAR */
 .navbar{
-  background-color: var(--cw-dark) !important;
+  background-color: #ffffff !important;
 }
 
 /* Logo */
 .cw-logo{
-  height:46px;
+  height:75px;
   width:auto;
   display:block;
 }
