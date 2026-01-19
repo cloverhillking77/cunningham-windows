@@ -16,8 +16,8 @@ body{
 
 /* Logo */
 .cw-logo{
-  height:75px;
-  max-height:75px;
+  height:150px;
+  max-height:150px;
   width:auto;
   display:block;
 }
@@ -58,4 +58,7 @@ body{
   display: inline-block;
   margin: .25rem .35rem 0 0;
   color:#000;
+}
+.container {
+  max-width: 75%;
 }
