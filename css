@@ -70,7 +70,7 @@ img.cw-logo{
       rgba(0,0,0,.55),
       rgba(0,0,0,.55)
     ),
-    url("/images/projects/windows-hero.jpg");
+    url("images/window_hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
