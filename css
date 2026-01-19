@@ -10,16 +10,17 @@ body{
 }
 
 /* NAVBAR */
-.navbar{
+.navbar-brand{
   background-color: #ffffff !important;
+  display:flex;
+  align-items:center;
 }
 
 /* Logo */
 .cw-logo{
-  height:150px;
-  max-height:150px;
-  width:auto;
-  display:block;
+  height:150px !important;
+  width:auto !important;
+  display:block !important;
 }
 
 /* HERO */
