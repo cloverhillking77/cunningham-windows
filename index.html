@@ -242,76 +242,51 @@
   <script>
     // functions/api/contact.js
 
-export async function onRequestPost({ request, env }) {
-  try {
-    const data = await request.json();
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    const { name, phone, email, service, message } = data;
+  const form = document.getElementById("contactForm");
+  const alertBox = document.getElementById("alert");
+  const submitBtn = document.getElementById("submitBtn");
 
-    if (!name || !phone) {
-      return Response.json({ error: "Name and phone are required." }, { status: 400 });
-    }
-
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Cunningham Windows <onboarding@resend.dev>",
-        to: ["cunninghamwindows@gmail.com"],
-        subject: `New estimate request from ${name}`,
-        reply_to: email || undefined,
-        html: `
-          <h2>New estimate request</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Email:</strong> ${email || "Not provided"}</p>
-          <p><strong>Service:</strong> ${service || "Not selected"}</p>
-          <p><strong>Message:</strong><br>${message || "No message"}</p>
-        `,
-      }),
-    });
-
-    const result = await resendResponse.json();
-
-    if (!resendResponse.ok) {
-      return Response.json(
-        { error: result.message || "Resend failed." },
-        { status: 500 }
-      );
-    }
-
-    return Response.json({ success: true, id: result.id });
-  } catch (err) {
-    return Response.json(
-      { error: err.message || "Something went wrong." },
-      { status: 500 }
-    );
+  function showAlert(type, msg) {
+    alertBox.className = `alert alert-${type}`;
+    alertBox.textContent = msg;
+    alertBox.classList.remove("d-none");
   }
-}
-      try {
-        const res = await fetch("https://form-to-email.cloverhillking77.workers.dev/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        });
 
-        const out = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(out?.error || "Failed to send.");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    alertBox.classList.add("d-none");
 
-        form.reset();
-        showAlert("success", "Thanks! Your request was sent. We’ll get back to you soon.");
-      } catch (err) {
-        showAlert("danger", err.message || "Something went wrong.");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="bi bi-send me-1"></i> Send';
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch("https://form-to-email.cloverhillking77.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const out = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(out?.error || "Failed to send.");
       }
-    });
-  </script>
 
+      form.reset();
+      showAlert("success", "Thanks! Your request was sent. We’ll get back to you soon.");
+    } catch (err) {
+      showAlert("danger", err.message || "Something went wrong.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="bi bi-send me-1"></i> Send';
+    }
+  });
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
