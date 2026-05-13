@@ -50,11 +50,24 @@
 }
 
 /* Optional: make it taller */
-.bg-windows{
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  max-height: 25%;
+.bg-windows {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  background-image:
+    linear-gradient(rgba(0,0,0,.42), rgba(0,0,0,.42)),
+    url("images/window_hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
 }
+
+.bg-windows .text-body-secondary {
+  color: rgba(255,255,255,.78) !important;
+}
+
   </style>
 </head>
 
