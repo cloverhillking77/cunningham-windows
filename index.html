@@ -264,7 +264,7 @@
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const res = await fetch("lively-river-3bf0.cloverhillking77.workers.dev", {
+      const res = await fetch("https://lively-river-3bf0.cloverhillking77.workers.dev", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -289,3 +289,4 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
