@@ -240,27 +240,57 @@
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // functions/api/contact.js
 
-    const form = document.getElementById("contactForm");
-    const alertBox = document.getElementById("alert");
-    const submitBtn = document.getElementById("submitBtn");
+export async function onRequestPost({ request, env }) {
+  try {
+    const data = await request.json();
 
-    function showAlert(type, msg) {
-      alertBox.className = `alert alert-${type}`;
-      alertBox.textContent = msg;
-      alertBox.classList.remove("d-none");
+    const { name, phone, email, service, message } = data;
+
+    if (!name || !phone) {
+      return Response.json({ error: "Name and phone are required." }, { status: 400 });
     }
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      alertBox.classList.add("d-none");
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Cunningham Windows <onboarding@resend.dev>",
+        to: ["cunninghamwindows@gmail.com"],
+        subject: `New estimate request from ${name}`,
+        reply_to: email || undefined,
+        html: `
+          <h2>New estimate request</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email || "Not provided"}</p>
+          <p><strong>Service:</strong> ${service || "Not selected"}</p>
+          <p><strong>Message:</strong><br>${message || "No message"}</p>
+        `,
+      }),
+    });
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending...";
+    const result = await resendResponse.json();
 
-      const data = Object.fromEntries(new FormData(form).entries());
+    if (!resendResponse.ok) {
+      return Response.json(
+        { error: result.message || "Resend failed." },
+        { status: 500 }
+      );
+    }
 
+    return Response.json({ success: true, id: result.id });
+  } catch (err) {
+    return Response.json(
+      { error: err.message || "Something went wrong." },
+      { status: 500 }
+    );
+  }
+}
       try {
         const res = await fetch("/api/contact", {
           method: "POST",
