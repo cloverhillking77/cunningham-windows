@@ -292,7 +292,7 @@ export async function onRequestPost({ request, env }) {
   }
 }
       try {
-        const res = await fetch("/api/contact", {
+        const res = await fetch("https://form-to-email.cloverhillking77.workers.dev/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
