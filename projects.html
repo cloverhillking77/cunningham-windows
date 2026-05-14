@@ -273,7 +273,7 @@ async function loadImages(){
           <div class="carousel-inner">
             ${group.map((img,i)=>`
               <div class="carousel-item ${i===0?'active':''}">
-                <img src="images/projects/${img}" onclick="openLightbox(this.src)">
+                <img src="images/projects/${img}" onerror="this.style.display='none'" onclick="openLightbox(this.src)">
               </div>
             `).join('')}
           </div>
