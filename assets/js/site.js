@@ -56,21 +56,31 @@ function renderSiteFooter() {
   const target = document.getElementById('site-footer');
   if (!target) return;
 
-  target.innerHTML = `
-    <footer class="py-4 bg-dark text-white-50">
-      <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+target.innerHTML = `
+  <footer class="py-4 bg-dark text-white-50">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+
+      <!-- LEFT SIDE -->
+      <div class="d-flex align-items-center gap-2">
+        <img src="images/cw-logo-revised.svg" 
+             alt="Cunningham Windows logo" 
+             style="height:30px; opacity:0.9; width:auto;">
+
         <div>
           <div class="fw-semibold text-white">Cunningham Windows</div>
-          <div>Window Repair • Glass Replacement • Doors</div>
-          <div class="small mt-1">7514 Gibbs Rd, Corryton, TN 37721</div>
-        </div>
-        <div class="text-md-end">
-          <a class="text-white-50" href="tel:+18655220800">(865) 522-0800</a>
-          <div class="small">© <span id="year"></span></div>
+          <div class="small">Window Repair • Glass Replacement • Doors</div>
         </div>
       </div>
-    </footer>
-  `;
+
+      <!-- RIGHT SIDE -->
+      <div class="text-md-end text-center">
+        <a class="text-white-50 d-block" href="tel:+18655220800">(865) 522-0800</a>
+        <div class="small">© <span id="year"></span></div>
+      </div>
+
+    </div>
+  </footer>
+`;
 
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
