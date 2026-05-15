@@ -65,7 +65,7 @@ function renderSiteFooter() {
     <footer class="py-4 bg-dark text-white-50">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
         <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:55px;width:auto;opacity:.9;flex:0 0 auto;">
+          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Window Repair • Glass Replacement • Doors</div>
@@ -75,34 +75,113 @@ function renderSiteFooter() {
 
         <div class="text-center">
           <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 gap-sm-4 mb-2">
-            <a href="${googleReviewUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+            <a href="${googleReviewUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
               <i class="bi bi-google fs-5"></i>
               <span class="small">Google Reviews</span>
             </a>
 
-            <a href="${facebookUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+            <a href="${facebookUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
               <i class="bi bi-facebook fs-5"></i>
               <span class="small">Facebook</span>
             </a>
 
-            <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+            <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
               <i class="bi bi-geo-alt-fill fs-5"></i>
               <span class="small">Maps</span>
             </a>
           </div>
 
-          <a class="text-white-50 d-block small" href="tel:+18655220800">(865) 522-0800</a>
+          <a class="text-white-50 d-block small footer-link" href="tel:+18655220800">(865) 522-0800</a>
           <div class="small mt-1">© <span id="year"></span></div>
         </div>
       </div>
     </footer>
+
+    <style>
+      .footer-link {
+        transition: all .18s ease;
+      }
+
+      .footer-link:hover {
+        color: #fff !important;
+        transform: translateY(-1px);
+      }
+    </style>
   `;
 
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 }
 
+function renderStickyCTA() {
+  if (document.getElementById('sticky-mobile-cta')) return;
+
+  const sticky = document.createElement('div');
+  sticky.id = 'sticky-mobile-cta';
+
+  sticky.innerHTML = `
+    <style>
+      #sticky-mobile-cta {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        display: none;
+      }
+
+      #sticky-mobile-cta .cta-wrap {
+        display: flex;
+        background: rgba(15,23,42,.96);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -10px 20px rgba(0,0,0,.18);
+      }
+
+      #sticky-mobile-cta a {
+        flex: 1;
+        text-align: center;
+        padding: 1rem .5rem;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      #sticky-mobile-cta .call-btn {
+        background: #198754;
+        color: #fff;
+      }
+
+      #sticky-mobile-cta .quote-btn {
+        background: #ff8200;
+        color: #111;
+      }
+
+      @media (max-width: 991px) {
+        #sticky-mobile-cta {
+          display: block;
+        }
+
+        body {
+          padding-bottom: 78px;
+        }
+      }
+    </style>
+
+    <div class="cta-wrap">
+      <a class="call-btn" href="tel:+18655220800">
+        <i class="bi bi-telephone-fill me-1"></i> Call Now
+      </a>
+
+      <a class="quote-btn" href="index.html#contact">
+        <i class="bi bi-chat-dots-fill me-1"></i> Get Quote
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(sticky);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSiteNav();
   renderSiteFooter();
+  renderStickyCTA();
 });
