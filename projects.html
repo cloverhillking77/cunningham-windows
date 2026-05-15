@@ -11,9 +11,14 @@
 :root{--cw-orange:#ff8200}
 body{background:#f6f7f9}
 .hero{background:linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.72)),url("images/window_hero.jpg");background-size:cover;background-position:center;color:#fff}
-.carousel img{height:540px;object-fit:contain;background:#111;cursor:pointer;width:100%}
-.project-card{border:0;border-radius:1rem;overflow:hidden}
+.gallery-card{border:0;border-radius:1.25rem;overflow:hidden;box-shadow:0 1rem 2rem rgba(15,23,42,.14)}
+.gallery-carousel{background:#111}
+.gallery-carousel .carousel-inner{background:#111}
+.gallery-carousel img{width:100%;height:clamp(420px,72vh,760px);object-fit:contain;background:#111;cursor:pointer}
+.carousel-caption{left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:4rem 1rem 1rem}
+.carousel-control-prev,.carousel-control-next{width:7%}
 .review-card{border:0;border-radius:1rem}
+.loading-box{min-height:360px;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;border-radius:1rem}
 </style>
 </head>
 <body>
@@ -29,9 +34,20 @@ body{background:#f6f7f9}
 </header>
 
 <section class="py-5">
-<div class="container">
-<div id="projectSliders" class="vstack gap-5"></div>
-</div>
+  <div class="container">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-4">
+      <div>
+        <p class="text-uppercase fw-bold text-primary mb-2">Project Photos</p>
+        <h2 class="fw-bold mb-1">One Large Carousel</h2>
+        <p class="text-body-secondary mb-0">Click any photo to enlarge it.</p>
+      </div>
+      <span id="photoCount" class="badge text-bg-dark align-self-start align-self-lg-end">Loading photos...</span>
+    </div>
+
+    <div id="projectGallery" class="gallery-card">
+      <div class="loading-box">Loading project images...</div>
+    </div>
+  </div>
 </section>
 
 <section class="py-5 bg-white">
@@ -41,36 +57,17 @@ body{background:#f6f7f9}
 
     <div class="row g-4 justify-content-center">
       <div class="col-md-4">
-        <div class="card review-card shadow-sm h-100">
-          <div class="card-body">
-            <div class="text-warning fs-4 mb-2">★★★★★</div>
-            <p class="text-body-secondary">Professional work, great communication, and clean installation.</p>
-          </div>
-        </div>
+        <div class="card review-card shadow-sm h-100"><div class="card-body"><div class="text-warning fs-4 mb-2">★★★★★</div><p class="text-body-secondary">Professional work, great communication, and clean installation.</p></div></div>
       </div>
-
       <div class="col-md-4">
-        <div class="card review-card shadow-sm h-100">
-          <div class="card-body">
-            <div class="text-warning fs-4 mb-2">★★★★★</div>
-            <p class="text-body-secondary">Quick response and quality window repair service.</p>
-          </div>
-        </div>
+        <div class="card review-card shadow-sm h-100"><div class="card-body"><div class="text-warning fs-4 mb-2">★★★★★</div><p class="text-body-secondary">Quick response and quality window repair service.</p></div></div>
       </div>
-
       <div class="col-md-4">
-        <div class="card review-card shadow-sm h-100">
-          <div class="card-body">
-            <div class="text-warning fs-4 mb-2">★★★★★</div>
-            <p class="text-body-secondary">Glass replacement was fast and everything looked great afterwards.</p>
-          </div>
-        </div>
+        <div class="card review-card shadow-sm h-100"><div class="card-body"><div class="text-warning fs-4 mb-2">★★★★★</div><p class="text-body-secondary">Glass replacement was fast and everything looked great afterwards.</p></div></div>
       </div>
     </div>
 
-    <a class="btn btn-primary btn-lg mt-4" target="_blank" rel="noopener" href="https://www.google.com/search?q=Cunningham+Windows+Corryton+TN+reviews">
-      Leave a Google Review
-    </a>
+    <a class="btn btn-primary btn-lg mt-4" target="_blank" rel="noopener" href="https://www.google.com/search?q=Cunningham+Windows+Corryton+TN+reviews">Leave a Google Review</a>
   </div>
 </section>
 
@@ -78,7 +75,8 @@ body{background:#f6f7f9}
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content bg-dark border-0">
       <div class="modal-body text-center p-2">
-        <img id="lightboxImg" class="img-fluid rounded">
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img id="lightboxImg" class="img-fluid rounded" alt="Enlarged project photo">
       </div>
     </div>
   </div>
@@ -87,56 +85,92 @@ body{background:#f6f7f9}
 <div id="site-footer"></div>
 
 <script>
-async function loadImages(){
-  try {
-    const res = await fetch('https://api.github.com/repos/cloverhillking77/cunningham-windows/contents/images/projects');
-    const files = await res.json();
+const imageExtensions = /\.(jpg|jpeg|png|webp)$/i;
+const imageFolder = 'images/projects/';
 
-    const images = files
-      .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-      .map(file => encodeURIComponent(file.name).replace(/%2F/g,'/'));
+async function imageExists(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
 
-    const groups = [];
-    for(let i=0;i<images.length;i+=4){
-      groups.push(images.slice(i,i+4));
-    }
+async function getValidImages(files) {
+  const candidates = files
+    .filter(file => file && file.type === 'file' && imageExtensions.test(file.name))
+    .map(file => file.name)
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
-    const container = document.getElementById('projectSliders');
+  const checks = await Promise.all(candidates.map(async name => {
+    const src = imageFolder + encodeURIComponent(name);
+    const ok = await imageExists(src);
+    return ok ? { name, src } : null;
+  }));
 
-    container.innerHTML = groups.map((group,index)=>{
-      const id = `carousel-${index}`;
+  return checks.filter(Boolean);
+}
 
-      return `
-        <div class="card project-card shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h2 class="h4 fw-bold mb-0">Project ${index + 1}</h2>
-              <span class="badge text-bg-dark">${group.length} Photos</span>
-            </div>
+function renderCarousel(images) {
+  const gallery = document.getElementById('projectGallery');
+  const count = document.getElementById('photoCount');
 
-            <div id="${id}" class="carousel slide">
-              <div class="carousel-inner rounded overflow-hidden">
-                ${group.map((img,i)=>`
-                  <div class="carousel-item ${i===0?'active':''}">
-                    <img src="images/projects/${img}" loading="lazy" onerror="this.closest('.carousel-item').remove()" onclick="openLightbox(this.src)">
-                  </div>
-                `).join('')}
-              </div>
+  if (!images.length) {
+    gallery.innerHTML = '<div class="loading-box">No project images could be loaded.</div>';
+    count.textContent = '0 Photos';
+    return;
+  }
 
-              <button class="carousel-control-prev" type="button" data-bs-target="#${id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </button>
+  count.textContent = `${images.length} Photos`;
 
-              <button class="carousel-control-next" type="button" data-bs-target="#${id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </button>
+  gallery.innerHTML = `
+    <div id="allProjectsCarousel" class="carousel slide gallery-carousel" data-bs-ride="carousel" data-bs-interval="4500">
+      <div class="carousel-indicators">
+        ${images.map((_, index) => `
+          <button type="button" data-bs-target="#allProjectsCarousel" data-bs-slide-to="${index}" ${index === 0 ? 'class="active" aria-current="true"' : ''} aria-label="Project photo ${index + 1}"></button>
+        `).join('')}
+      </div>
+
+      <div class="carousel-inner">
+        ${images.map((image, index) => `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <img src="${image.src}" loading="${index === 0 ? 'eager' : 'lazy'}" alt="Cunningham Windows project photo ${index + 1}" onclick="openLightbox(this.src)">
+            <div class="carousel-caption d-none d-md-block">
+              <div class="fw-semibold">Project Photo ${index + 1} of ${images.length}</div>
             </div>
           </div>
-        </div>
-      `;
-    }).join('');
+        `).join('')}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  `;
+}
+
+async function loadImages(){
+  const gallery = document.getElementById('projectGallery');
+
+  try {
+    const res = await fetch('https://api.github.com/repos/cloverhillking77/cunningham-windows/contents/images/projects');
+
+    if (!res.ok) throw new Error('Could not load project image list.');
+
+    const files = await res.json();
+    const validImages = await getValidImages(files);
+    renderCarousel(validImages);
   } catch(err){
     console.error(err);
+    gallery.innerHTML = '<div class="loading-box">Project images could not be loaded right now.</div>';
+    document.getElementById('photoCount').textContent = 'Images unavailable';
   }
 }
 
