@@ -63,8 +63,8 @@ function renderSiteFooter() {
 
   target.innerHTML = `
     <footer class="py-4 bg-dark text-white-50">
-      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-        <div class="d-flex align-items-center gap-3 text-center text-md-start">
+      <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
+        <div class="d-flex align-items-center gap-3 text-center text-lg-start">
           <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:34px;width:auto;opacity:.9;flex:0 0 auto;">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
@@ -73,13 +73,25 @@ function renderSiteFooter() {
           </div>
         </div>
 
-        <div class="text-md-end text-center">
-          <a class="text-white-50 d-block" href="tel:+18655220800">(865) 522-0800</a>
-          <a class="text-white-50 small d-block" href="${googleMapsUrl}" target="_blank" rel="noopener">Find us on Google Maps</a>
-          <div class="d-flex justify-content-center justify-content-md-end gap-3 small mt-1">
-            <a class="text-white-50" href="${googleReviewUrl}" target="_blank" rel="noopener">Google Reviews</a>
-            <a class="text-white-50" href="${facebookUrl}" target="_blank" rel="noopener">Facebook</a>
+        <div class="text-center">
+          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 gap-sm-4 mb-2">
+            <a href="${googleReviewUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-google fs-5"></i>
+              <span class="small">Google Reviews</span>
+            </a>
+
+            <a href="${facebookUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-facebook fs-5"></i>
+              <span class="small">Facebook</span>
+            </a>
+
+            <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill fs-5"></i>
+              <span class="small">Maps</span>
+            </a>
           </div>
+
+          <a class="text-white-50 d-block small" href="tel:+18655220800">(865) 522-0800</a>
           <div class="small mt-1">© <span id="year"></span></div>
         </div>
       </div>
