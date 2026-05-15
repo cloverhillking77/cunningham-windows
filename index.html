@@ -37,7 +37,10 @@
     "areaServed": ["Knoxville TN", "Corryton TN", "East Tennessee"],
     "description": "Window repair, replacement windows, glass replacement, screens, doors, and exterior home services.",
     "image": "https://cunningham-windows.pages.dev/images/window_hero.jpg",
-    "sameAs": []
+    "sameAs": [
+      "https://www.facebook.com/windowzrus/",
+      "https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdadE4yTnJaZxgK"
+    ]
   }
   </script>
 
@@ -49,9 +52,6 @@
     }
 
     body { background: #fff; }
-
-    .navbar-brand img { height: 90px; width: auto; }
-
     .hero {
       background:
         radial-gradient(900px 500px at 15% 0%, rgba(13,110,253,.25), transparent 60%),
@@ -59,13 +59,11 @@
         #0b1220;
       color: #fff;
     }
-
     .glass-panel {
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.14);
       backdrop-filter: blur(10px);
     }
-
     .eyebrow {
       color: var(--cw-orange);
       font-weight: 700;
@@ -73,10 +71,8 @@
       text-transform: uppercase;
       font-size: .85rem;
     }
-
     .card-hover { transition: transform .15s ease, box-shadow .15s ease; }
     .card-hover:hover { transform: translateY(-2px); box-shadow: 0 1rem 2rem rgba(0,0,0,.15); }
-
     .service-icon {
       width: 52px;
       height: 52px;
@@ -88,7 +84,14 @@
       color: var(--cw-orange);
       font-size: 1.6rem;
     }
-
+    .trust-strip {
+      background: #0f172a;
+      color: #fff;
+    }
+    .trust-strip .stat {
+      border-right: 1px solid rgba(255,255,255,.14);
+    }
+    .trust-strip .stat:last-child { border-right: 0; }
     .bg-windows {
       min-height: 620px;
       display: flex;
@@ -101,7 +104,6 @@
       background-repeat: no-repeat;
       color: #fff;
     }
-
     .content-card {
       max-width: 720px;
       background: rgba(8,13,24,.76);
@@ -110,10 +112,8 @@
       padding: clamp(1.5rem, 3vw, 2.5rem);
       box-shadow: 0 1rem 2rem rgba(0,0,0,.25);
     }
-
     .content-card p,
     .content-card li { color: rgba(255,255,255,.82); }
-
     .glass-image {
       width: 100%;
       min-height: 360px;
@@ -121,52 +121,27 @@
       border-radius: 1.25rem;
       box-shadow: 0 1rem 2rem rgba(15,23,42,.16);
     }
-
-    .file-help {
-      font-size: .875rem;
-      color: #6c757d;
+    .review-card {
+      border: 0;
+      border-radius: 1.25rem;
+      box-shadow: 0 1rem 2rem rgba(15,23,42,.1);
     }
-
+    .review-stars { color: #ffc107; letter-spacing: .08em; }
+    .map-frame {
+      width: 100%;
+      min-height: 380px;
+      border: 0;
+      border-radius: 1.25rem;
+      box-shadow: 0 1rem 2rem rgba(15,23,42,.12);
+    }
+    .file-help { font-size: .875rem; color: #6c757d; }
     footer a { text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-        <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo">
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
-            <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#windows">Windows</a></li>
-              <li><a class="dropdown-item" href="#glass">Glass Service</a></li>
-            </ul>
-          </li>
-          
-          <li class="nav-item"><a class="nav-link" href="window-repair-knoxville.html">Window Repair Knoxville</a></li>
-          <li class="nav-item"><a class="nav-link" href="glass-replacement-knoxville.html">Glass Replacement Knoxville</a></li>
-          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item ms-lg-2">
-            <a class="btn btn-primary btn-sm" href="tel:+18655220800">
-              <i class="bi bi-telephone me-1"></i> (865) 522-0800
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div id="site-nav"></div>
 
   <header id="home" class="hero py-5">
     <div class="container py-4">
@@ -178,30 +153,39 @@
             From replacement windows and broken glass to screens, seals, doors, and home exterior projects, Cunningham Windows helps homeowners improve comfort, curb appeal, and everyday function.
           </p>
           <div class="d-flex gap-2 flex-wrap">
-            <a class="btn btn-success btn-lg" href="tel:+18655220800">
-              <i class="bi bi-telephone me-1"></i> Call Now
-            </a>
-            <a class="btn btn-outline-light btn-lg" href="#contact">Get a Free Quote</a>
-            <a class="btn btn-warning btn-lg fw-semibold" href="projects.html">View Projects</a>
+            <a class="btn btn-success btn-lg" href="tel:+18655220800"><i class="bi bi-telephone me-1"></i> Call Now</a>
+            <a class="btn btn-warning btn-lg fw-semibold" href="#contact">Get a Free Quote</a>
+            <a class="btn btn-outline-light btn-lg" href="projects.html">View Projects</a>
           </div>
           <div class="mt-4 small text-white-50">
-            <i class="bi bi-geo-alt me-1"></i> Knoxville, TN • (865) 522-0800
+            <i class="bi bi-geo-alt me-1"></i> Knoxville, Corryton & East Tennessee • (865) 522-0800
           </div>
         </div>
 
         <div class="col-lg-5">
           <div class="glass-panel rounded-4 p-4 shadow">
-            <h2 class="h5 fw-semibold mb-3">How can we help?</h2>
+            <h2 class="h5 fw-semibold mb-3">Get help fast</h2>
+            <p class="text-white-50 mb-3">Tell us what is broken, fogged, cracked, or drafty. Upload a photo and we’ll respond with next steps.</p>
             <div class="row g-2">
               <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#windows">Window Installation & Repairs</a></div>
               <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#glass">Glass Replacement & Screens</a></div>
-              <div class="col-12"><a class="btn btn-outline-light w-100 text-start" href="#contact">Request an Estimate</a></div>
+              <div class="col-12"><a class="btn btn-warning w-100 text-start fw-semibold" href="#contact">Request an Estimate</a></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </header>
+
+  <section class="trust-strip py-4">
+    <div class="container">
+      <div class="row g-3 text-center">
+        <div class="col-md-4 stat"><div class="h4 mb-1">Local Service</div><div class="small text-white-50">Knoxville, Corryton & East Tennessee</div></div>
+        <div class="col-md-4 stat"><div class="h4 mb-1">Photo Estimates</div><div class="small text-white-50">Upload a picture with your request</div></div>
+        <div class="col-md-4 stat"><div class="h4 mb-1">Windows • Glass • Doors</div><div class="small text-white-50">Repair and replacement options</div></div>
+      </div>
+    </div>
+  </section>
 
   <section id="services" class="py-5 bg-body-tertiary">
     <div class="container">
@@ -218,6 +202,7 @@
               <span class="service-icon"><i class="bi bi-window"></i></span>
               <h3 class="h5 fw-bold mt-3">Window Installation</h3>
               <p class="text-body-secondary">Replace outdated, drafty, or damaged windows with options that improve comfort, efficiency, and curb appeal.</p>
+              <a href="window-repair-knoxville.html" class="stretched-link text-decoration-none">Window repair services</a>
             </div>
           </div>
         </div>
@@ -228,6 +213,7 @@
               <span class="service-icon"><i class="bi bi-tools"></i></span>
               <h3 class="h5 fw-bold mt-3">Window Repairs</h3>
               <p class="text-body-secondary">Repair broken glass, fogged panes, damaged screens, seals, hardware, and other common window issues.</p>
+              <a href="#contact" class="stretched-link text-decoration-none">Request repair help</a>
             </div>
           </div>
         </div>
@@ -238,6 +224,7 @@
               <span class="service-icon"><i class="bi bi-grid-3x3"></i></span>
               <h3 class="h5 fw-bold mt-3">Glass Replacement</h3>
               <p class="text-body-secondary">Replace cracked, cloudy, or damaged glass with clean, professional service for windows, doors, and more.</p>
+              <a href="glass-replacement-knoxville.html" class="stretched-link text-decoration-none">Glass replacement services</a>
             </div>
           </div>
         </div>
@@ -250,9 +237,7 @@
       <div class="content-card">
         <p class="eyebrow mb-2">Windows</p>
         <h2 class="fw-bold mb-3">Better Windows for a Better Home</h2>
-        <p class="mb-4">
-          Whether you need a full window replacement or a focused repair, Cunningham Windows can help restore the look, comfort, and performance of your home. We handle everything from damaged panes and worn parts to replacement windows designed to reduce drafts and improve curb appeal.
-        </p>
+        <p class="mb-4">Whether you need a full window replacement or a focused repair, Cunningham Windows can help restore the look, comfort, and performance of your home.</p>
         <div class="row g-3">
           <div class="col-sm-6"><i class="bi bi-check-circle-fill text-warning me-2"></i>Replacement windows</div>
           <div class="col-sm-6"><i class="bi bi-check-circle-fill text-warning me-2"></i>Broken glass repair</div>
@@ -273,16 +258,83 @@
         <div class="col-lg-6">
           <p class="eyebrow mb-2">Glass Service</p>
           <h2 class="fw-bold mb-3">Clear, Clean Glass Replacement</h2>
-          <p class="text-body-secondary">
-            Damaged or cloudy glass can make a home look older and feel less comfortable. We replace cracked panes, fogged insulated glass, damaged door glass, and screens so your home looks clean, safe, and well maintained again.
-          </p>
-          <p class="text-body-secondary">
-            If you are not sure whether you need a repair or full replacement, send a quick message with a photo or description and we will point you in the right direction.
-          </p>
+          <p class="text-body-secondary">Damaged or cloudy glass can make a home look older and feel less comfortable. We replace cracked panes, fogged insulated glass, damaged door glass, and screens so your home looks clean, safe, and well maintained again.</p>
+          <p class="text-body-secondary">If you are not sure whether you need a repair or full replacement, send a quick message with a photo or description and we will point you in the right direction.</p>
           <div class="d-flex gap-2 flex-wrap mt-4">
             <a class="btn btn-primary btn-lg" href="#contact">Get Glass Help</a>
             <a class="btn btn-outline-secondary btn-lg" href="projects.html">See Project Photos</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-4">
+        <p class="eyebrow mb-2">Reviews</p>
+        <h2 class="fw-bold">What Customers Look For: Fast, Local, Reliable Help</h2>
+        <p class="text-body-secondary mx-auto" style="max-width:760px;">Real Google reviews should be added when available. This section is ready for your best customer quotes and links visitors directly to your review profile.</p>
+      </div>
+
+      <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card review-card mx-auto" style="max-width:760px;">
+              <div class="card-body p-4 text-center">
+                <div class="review-stars fs-3 mb-3">★★★★★</div>
+                <p class="lead mb-3">Professional service, clear communication, and quality workmanship for home window and glass projects.</p>
+                <div class="fw-semibold">Cunningham Windows Customer</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card review-card mx-auto" style="max-width:760px;">
+              <div class="card-body p-4 text-center">
+                <div class="review-stars fs-3 mb-3">★★★★★</div>
+                <p class="lead mb-3">A picture helps the team understand the issue quickly and point homeowners toward the right repair.</p>
+                <div class="fw-semibold">Local Homeowner</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card review-card mx-auto" style="max-width:760px;">
+              <div class="card-body p-4 text-center">
+                <div class="review-stars fs-3 mb-3">★★★★★</div>
+                <p class="lead mb-3">Trusted local help for cracked glass, fogged panes, screens, doors, and replacement windows.</p>
+                <div class="fw-semibold">East Tennessee Service Area</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next"><span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span></button>
+      </div>
+
+      <div class="text-center mt-4">
+        <a class="btn btn-warning btn-lg fw-semibold" href="https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdadE4yTnJaZxgK" target="_blank" rel="noopener">Read or Leave a Google Review</a>
+        <a class="btn btn-outline-primary btn-lg ms-lg-2 mt-2 mt-lg-0" href="https://www.facebook.com/windowzrus/" target="_blank" rel="noopener">Visit Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="location" class="py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-5">
+          <p class="eyebrow mb-2">Service Area</p>
+          <h2 class="fw-bold">Local Window & Glass Service Near Knoxville</h2>
+          <p class="text-body-secondary">Cunningham Windows is based in Corryton and serves Knoxville and surrounding East Tennessee communities.</p>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="fw-semibold">Cunningham Windows</div>
+              <div class="text-body-secondary">7514 Gibbs Rd<br>Corryton, TN 37721</div>
+              <a class="btn btn-primary mt-3" href="https://www.google.com/maps/search/?api=1&query=Cunningham+Windows+7514+Gibbs+Rd+Corryton+TN+37721" target="_blank" rel="noopener">Open in Google Maps</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Cunningham%20Windows%207514%20Gibbs%20Rd%20Corryton%20TN%2037721&output=embed" title="Cunningham Windows map location"></iframe>
         </div>
       </div>
     </div>
@@ -313,41 +365,13 @@
               <div id="alert" class="alert d-none" role="alert"></div>
 
               <form id="contactForm" class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Name</label>
-                  <input class="form-control" name="name" autocomplete="name" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Phone</label>
-                  <input class="form-control" name="phone" autocomplete="tel" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Email</label>
-                  <input class="form-control" type="email" name="email" autocomplete="email">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Service Needed</label>
-                  <select class="form-select" name="service">
-                    <option>Windows</option>
-                    <option>Glass Service</option>
-                    <option>Doors</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Upload a Photo <span class="text-body-secondary">(optional)</span></label>
-                  <input id="projectPhoto" class="form-control" type="file" name="photo" accept="image/jpeg,image/png,image/webp">
-                  <div class="file-help mt-1">Accepted: JPG, PNG, or WEBP. Max size: 5 MB.</div>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Message</label>
-                  <textarea class="form-control" name="message" rows="5" placeholder="Tell us what you need…"></textarea>
-                </div>
-                <div class="col-12 d-flex gap-2 flex-wrap">
-                  <button id="submitBtn" class="btn btn-primary btn-lg" type="submit">
-                    <i class="bi bi-send me-1"></i> Send Request
-                  </button>
-                </div>
+                <div class="col-md-6"><label class="form-label">Name</label><input class="form-control" name="name" autocomplete="name" required></div>
+                <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" name="phone" autocomplete="tel" required></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email" name="email" autocomplete="email"></div>
+                <div class="col-md-6"><label class="form-label">Service Needed</label><select class="form-select" name="service"><option>Windows</option><option>Glass Service</option><option>Doors</option><option>Other</option></select></div>
+                <div class="col-12"><label class="form-label">Upload a Photo <span class="text-body-secondary">(optional)</span></label><input id="projectPhoto" class="form-control" type="file" name="photo" accept="image/jpeg,image/png,image/webp"><div class="file-help mt-1">Accepted: JPG, PNG, or WEBP. Max size: 5 MB.</div></div>
+                <div class="col-12"><label class="form-label">Message</label><textarea class="form-control" name="message" rows="5" placeholder="Tell us what you need…"></textarea></div>
+                <div class="col-12 d-flex gap-2 flex-wrap"><button id="submitBtn" class="btn btn-primary btn-lg" type="submit"><i class="bi bi-send me-1"></i> Send Request</button></div>
               </form>
 
               <p class="small text-body-secondary mt-3 mb-0">Form submits securely to our contact endpoint.</p>
@@ -377,10 +401,7 @@
     function fileToBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => {
-          const result = String(reader.result || "");
-          resolve(result.split(",")[1] || "");
-        };
+        reader.onload = () => resolve(String(reader.result || "").split(",")[1] || "");
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
@@ -388,7 +409,6 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       alertBox.classList.add("d-none");
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
@@ -398,15 +418,8 @@
 
       try {
         if (photo) {
-          if (photo.size > maxUploadSize) {
-            throw new Error("Please upload an image smaller than 5 MB.");
-          }
-
-          data.attachment = {
-            filename: photo.name,
-            contentType: photo.type,
-            content: await fileToBase64(photo)
-          };
+          if (photo.size > maxUploadSize) throw new Error("Please upload an image smaller than 5 MB.");
+          data.attachment = { filename: photo.name, contentType: photo.type, content: await fileToBase64(photo) };
         }
 
         delete data.photo;
@@ -418,7 +431,6 @@
         });
 
         const out = await res.json().catch(() => ({}));
-
         if (!res.ok) throw new Error(out?.error || "Failed to send.");
 
         form.reset();
