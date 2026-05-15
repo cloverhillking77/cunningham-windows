@@ -6,6 +6,10 @@ const sitePages = [
   { href: 'index.html#contact', label: 'Contact' }
 ];
 
+const googleReviewUrl = 'https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdadE4yTnJaZxgK';
+const facebookUrl = 'https://www.facebook.com/windowzrus/';
+const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Cunningham+Windows+7514+Gibbs+Rd+Corryton+TN+37721';
+
 function currentPageName() {
   const path = window.location.pathname || '/';
   return path.substring(path.lastIndexOf('/') + 1) || 'index.html';
@@ -61,7 +65,7 @@ function renderSiteFooter() {
     <footer class="py-4 bg-dark text-white-50">
       <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
         <div class="d-flex align-items-center gap-3 text-center text-md-start">
-          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:40px;width:auto;opacity:.9;flex:0 0 auto;">
+          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:34px;width:auto;opacity:.9;flex:0 0 auto;">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Window Repair • Glass Replacement • Doors</div>
@@ -71,8 +75,12 @@ function renderSiteFooter() {
 
         <div class="text-md-end text-center">
           <a class="text-white-50 d-block" href="tel:+18655220800">(865) 522-0800</a>
-          <a class="text-white-50 small d-block" href="https://www.google.com/maps/search/?api=1&query=Cunningham+Windows+7514+Gibbs+Rd+Corryton+TN+37721" target="_blank" rel="noopener">Find us on Google Maps</a>
-          <div class="small">© <span id="year"></span></div>
+          <a class="text-white-50 small d-block" href="${googleMapsUrl}" target="_blank" rel="noopener">Find us on Google Maps</a>
+          <div class="d-flex justify-content-center justify-content-md-end gap-3 small mt-1">
+            <a class="text-white-50" href="${googleReviewUrl}" target="_blank" rel="noopener">Google Reviews</a>
+            <a class="text-white-50" href="${facebookUrl}" target="_blank" rel="noopener">Facebook</a>
+          </div>
+          <div class="small mt-1">© <span id="year"></span></div>
         </div>
       </div>
     </footer>
