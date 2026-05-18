@@ -85,79 +85,54 @@ function renderSiteNav() {
         box-shadow: none;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 576px) {
+        .navbar {
+          padding-top: .7rem;
+          padding-bottom: .7rem;
+        }
+
         .navbar > .container-fluid {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: .75rem;
         }
 
         .cw-brand {
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          justify-content: center;
+          gap: .2rem !important;
           flex: 1;
           min-width: 0;
-          gap: .95rem !important;
         }
 
         .cw-brand-logo {
-          height: 126px;
-          max-width: 240px;
-        }
-
-        .cw-brand-title {
-          font-size: 1.55rem;
-          line-height: 1;
-          white-space: nowrap;
-        }
-
-        .cw-brand-sub {
-          font-size: .68rem;
-          letter-spacing: .16em;
-          white-space: nowrap;
-        }
-      }
-
-      @media (max-width: 576px) {
-        .navbar {
-          padding-top: .8rem;
-          padding-bottom: .8rem;
-        }
-
-        .cw-brand {
-          width: 100%;
-          gap: .8rem !important;
-        }
-
-        .cw-brand-logo {
-          height: 108px;
-          max-width: 210px;
+          height: 95px;
+          max-width: 180px;
         }
 
         .cw-brand-text {
-          min-width: 0;
+          padding-left: .15rem;
         }
 
         .cw-brand-title {
-          font-size: 1.38rem;
-          font-weight: 800;
+          font-size: 1.2rem;
           line-height: 1;
+          white-space: nowrap;
         }
 
         .cw-brand-sub {
-          font-size: .58rem;
-          letter-spacing: .14em;
-          margin-top: .22rem;
+          font-size: .56rem;
+          letter-spacing: .15em;
+          margin-top: .18rem;
+          white-space: nowrap;
         }
 
         .navbar-toggler {
           margin-left: auto;
           flex-shrink: 0;
-          padding: .75rem .95rem;
-        }
-
-        .navbar-toggler-icon {
-          width: 1.45em;
-          height: 1.45em;
+          align-self: center;
         }
       }
     </style>
@@ -180,11 +155,6 @@ function renderSiteNav() {
         <div id="nav" class="collapse navbar-collapse">
           <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
             ${links}
-            <li class="nav-item ms-lg-2">
-              <a class="btn btn-primary btn-sm" href="tel:+18655220800">
-                <i class="bi bi-telephone me-1"></i> (865) 522-0800
-              </a>
-            </li>
           </ul>
         </div>
       </div>
@@ -192,131 +162,6 @@ function renderSiteNav() {
   `;
 }
 
-function renderSiteFooter() {
-  const target = document.getElementById('site-footer');
-  if (!target) return;
-
-  target.innerHTML = `
-    <footer class="py-4 bg-dark text-white-50">
-      <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
-        <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/current_logo.png" alt="Cunningham Windows logo" style="height:64px;width:auto;max-width:180px;opacity:.96;flex:0 0 auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));">
-          <div>
-            <div class="fw-semibold text-white">Cunningham Windows</div>
-            <div class="small">Window Repair • Glass Replacement • Doors</div>
-            <div class="small">7514 Gibbs Rd, Corryton, TN 37721</div>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 gap-sm-4 mb-2">
-            <a href="${googleReviewUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
-              <i class="bi bi-google fs-5"></i>
-              <span class="small">Google Reviews</span>
-            </a>
-
-            <a href="${facebookUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
-              <i class="bi bi-facebook fs-5"></i>
-              <span class="small">Facebook</span>
-            </a>
-
-            <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="text-white-50 text-decoration-none d-flex align-items-center gap-2 footer-link">
-              <i class="bi bi-geo-alt-fill fs-5"></i>
-              <span class="small">Maps</span>
-            </a>
-          </div>
-
-          <a class="text-white-50 d-block small footer-link" href="tel:+18655220800">(865) 522-0800</a>
-          <div class="small mt-1">© <span id="year"></span></div>
-        </div>
-      </div>
-    </footer>
-
-    <style>
-      .footer-link {
-        transition: all .18s ease;
-      }
-
-      .footer-link:hover {
-        color: #fff !important;
-        transform: translateY(-1px);
-      }
-    </style>
-  `;
-
-  const year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
-}
-
-function renderStickyCTA() {
-  if (document.getElementById('sticky-mobile-cta')) return;
-
-  const sticky = document.createElement('div');
-  sticky.id = 'sticky-mobile-cta';
-
-  sticky.innerHTML = `
-    <style>
-      #sticky-mobile-cta {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1050;
-        display: none;
-      }
-
-      #sticky-mobile-cta .cta-wrap {
-        display: flex;
-        background: rgba(15,23,42,.96);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 -10px 20px rgba(0,0,0,.18);
-      }
-
-      #sticky-mobile-cta a {
-        flex: 1;
-        text-align: center;
-        padding: 1rem .5rem;
-        text-decoration: none;
-        font-weight: 700;
-      }
-
-      #sticky-mobile-cta .call-btn {
-        background: #198754;
-        color: #fff;
-      }
-
-      #sticky-mobile-cta .quote-btn {
-        background: #ff8200;
-        color: #111;
-      }
-
-      @media (max-width: 991px) {
-        #sticky-mobile-cta {
-          display: block;
-        }
-
-        body {
-          padding-bottom: 78px;
-        }
-      }
-    </style>
-
-    <div class="cta-wrap">
-      <a class="call-btn" href="tel:+18655220800">
-        <i class="bi bi-telephone-fill me-1"></i> Call Now
-      </a>
-
-      <a class="quote-btn" href="index.html#contact">
-        <i class="bi bi-chat-dots-fill me-1"></i> Get Quote
-      </a>
-    </div>
-  `;
-
-  document.body.appendChild(sticky);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   renderSiteNav();
-  renderSiteFooter();
-  renderStickyCTA();
 });
