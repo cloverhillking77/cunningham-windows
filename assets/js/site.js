@@ -123,7 +123,7 @@ function renderSiteFooter() {
     <footer class="py-4 bg-dark text-white-50">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
         <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
+          <img src="projects/cunninghamwindows_newlogo.jpeg" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Window Repair • Glass Replacement • Doors</div>
