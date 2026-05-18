@@ -32,10 +32,68 @@ function renderSiteNav() {
   `).join('');
 
   target.innerHTML = `
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap');
+
+      .cw-brand {
+        text-decoration: none;
+      }
+
+      .cw-brand-logo {
+        height: 96px;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .cw-brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .cw-brand-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(1.2rem, 2vw, 1.85rem);
+        font-weight: 800;
+        letter-spacing: .02em;
+        color: #fff;
+      }
+
+      .cw-brand-sub {
+        font-family: 'Montserrat', sans-serif;
+        font-size: .72rem;
+        font-weight: 600;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,.72);
+        margin-top: .2rem;
+      }
+
+      @media (max-width: 576px) {
+        .cw-brand-logo {
+          height: 74px;
+        }
+
+        .cw-brand-title {
+          font-size: 1.15rem;
+        }
+
+        .cw-brand-sub {
+          font-size: .58rem;
+          letter-spacing: .16em;
+        }
+      }
+    </style>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="Cunningham Windows home">
-          <img src="images/cw-logo-revised.svg" alt="Cunningham Windows logo" style="height:72px;width:auto;">
+        <a class="navbar-brand d-flex align-items-center gap-3 cw-brand" href="index.html" aria-label="Cunningham Windows home">
+          <img class="cw-brand-logo" src="images/cw-logo-revised.svg" alt="Cunningham Windows logo">
+
+          <div class="cw-brand-text">
+            <span class="cw-brand-title">Cunningham Windows</span>
+            <span class="cw-brand-sub">Windows • Glass • Doors</span>
+          </div>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
