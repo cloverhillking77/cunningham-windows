@@ -88,7 +88,7 @@ function renderSiteNav() {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-3 cw-brand" href="index.html" aria-label="Cunningham Windows home">
-          <img class="cw-brand-logo" src="images/cw-logo-revised.svg" alt="Cunningham Windows logo">
+          <img class="cw-brand-logo" src="projects/cunninghamwindows_newlogo.jpeg" alt="Cunningham Windows logo">
 
           <div class="cw-brand-text">
             <span class="cw-brand-title">Cunningham Windows</span>
