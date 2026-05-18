@@ -73,39 +73,91 @@ function renderSiteNav() {
         margin-top: .28rem;
       }
 
+      .navbar-toggler {
+        margin-left: auto;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.06);
+        padding: .7rem .95rem;
+        border-radius: 1rem;
+      }
+
+      .navbar-toggler:focus {
+        box-shadow: none;
+      }
+
       @media (max-width: 768px) {
+        .navbar > .container-fluid {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: .75rem;
+        }
+
+        .cw-brand {
+          flex: 1;
+          min-width: 0;
+          gap: .95rem !important;
+        }
+
         .cw-brand-logo {
-          height: 112px;
-          max-width: 220px;
+          height: 126px;
+          max-width: 240px;
         }
 
         .cw-brand-title {
-          font-size: 1.35rem;
+          font-size: 1.55rem;
+          line-height: 1;
+          white-space: nowrap;
         }
 
         .cw-brand-sub {
-          font-size: .62rem;
-          letter-spacing: .18em;
+          font-size: .68rem;
+          letter-spacing: .16em;
+          white-space: nowrap;
         }
       }
 
       @media (max-width: 576px) {
+        .navbar {
+          padding-top: .8rem;
+          padding-bottom: .8rem;
+        }
+
         .cw-brand {
-          gap: .85rem !important;
+          width: 100%;
+          gap: .8rem !important;
         }
 
         .cw-brand-logo {
-          height: 96px;
-          max-width: 190px;
+          height: 108px;
+          max-width: 210px;
+        }
+
+        .cw-brand-text {
+          min-width: 0;
         }
 
         .cw-brand-title {
-          font-size: 1.12rem;
+          font-size: 1.38rem;
+          font-weight: 800;
+          line-height: 1;
         }
 
         .cw-brand-sub {
-          font-size: .54rem;
+          font-size: .58rem;
           letter-spacing: .14em;
+          margin-top: .22rem;
+        }
+
+        .navbar-toggler {
+          margin-left: auto;
+          flex-shrink: 0;
+          padding: .75rem .95rem;
+        }
+
+        .navbar-toggler-icon {
+          width: 1.45em;
+          height: 1.45em;
         }
       }
     </style>
