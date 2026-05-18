@@ -88,7 +88,7 @@ function renderSiteNav() {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-3 cw-brand" href="index.html" aria-label="Cunningham Windows home">
-          <img class="cw-brand-logo" src="images/cunninghamwindows_newlogo_transparent.png" alt="Cunningham Windows logo">
+          <img class="cw-brand-logo" src="images/current_logo.png" alt="Cunningham Windows logo">
 
           <div class="cw-brand-text">
             <span class="cw-brand-title">Cunningham Windows</span>
@@ -123,7 +123,7 @@ function renderSiteFooter() {
     <footer class="py-4 bg-dark text-white-50">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
         <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/cunninghamwindows_newlogo_transparent.png" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
+          <img src="images/current_logo.png" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Window Repair • Glass Replacement • Doors</div>
