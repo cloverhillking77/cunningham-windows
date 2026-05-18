@@ -40,9 +40,9 @@ function renderSiteNav() {
       }
 
       .cw-brand-logo {
-        height: 138px;
+        height: 160px;
         width: auto;
-        max-width: 280px;
+        max-width: 300px;
         object-fit: contain;
         flex-shrink: 0;
         filter: drop-shadow(0 6px 16px rgba(0,0,0,.45));
