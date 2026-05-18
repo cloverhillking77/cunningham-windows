@@ -40,9 +40,12 @@ function renderSiteNav() {
       }
 
       .cw-brand-logo {
-        height: 96px;
+        height: 138px;
         width: auto;
+        max-width: 280px;
+        object-fit: contain;
         flex-shrink: 0;
+        filter: drop-shadow(0 6px 16px rgba(0,0,0,.45));
       }
 
       .cw-brand-text {
@@ -53,41 +56,63 @@ function renderSiteNav() {
 
       .cw-brand-title {
         font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.2rem, 2vw, 1.85rem);
+        font-size: clamp(1.35rem, 2.2vw, 2.15rem);
         font-weight: 800;
         letter-spacing: .02em;
         color: #fff;
+        text-shadow: 0 2px 10px rgba(0,0,0,.35);
       }
 
       .cw-brand-sub {
         font-family: 'Montserrat', sans-serif;
-        font-size: .72rem;
-        font-weight: 600;
-        letter-spacing: .22em;
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .24em;
         text-transform: uppercase;
-        color: rgba(255,255,255,.72);
-        margin-top: .2rem;
+        color: rgba(255,255,255,.78);
+        margin-top: .28rem;
       }
 
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         .cw-brand-logo {
-          height: 74px;
+          height: 112px;
+          max-width: 220px;
         }
 
         .cw-brand-title {
-          font-size: 1.15rem;
+          font-size: 1.35rem;
         }
 
         .cw-brand-sub {
-          font-size: .58rem;
-          letter-spacing: .16em;
+          font-size: .62rem;
+          letter-spacing: .18em;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .cw-brand {
+          gap: .85rem !important;
+        }
+
+        .cw-brand-logo {
+          height: 96px;
+          max-width: 190px;
+        }
+
+        .cw-brand-title {
+          font-size: 1.12rem;
+        }
+
+        .cw-brand-sub {
+          font-size: .54rem;
+          letter-spacing: .14em;
         }
       }
     </style>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-3 cw-brand" href="index.html" aria-label="Cunningham Windows home">
+      <div class="container-fluid px-lg-4">
+        <a class="navbar-brand d-flex align-items-center gap-4 cw-brand" href="index.html" aria-label="Cunningham Windows home">
           <img class="cw-brand-logo" src="images/current_logo.png" alt="Cunningham Windows logo">
 
           <div class="cw-brand-text">
@@ -123,7 +148,7 @@ function renderSiteFooter() {
     <footer class="py-4 bg-dark text-white-50">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
         <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/current_logo.png" alt="Cunningham Windows logo" style="height:42px;width:auto;opacity:.9;flex:0 0 auto;">
+          <img src="images/current_logo.png" alt="Cunningham Windows logo" style="height:64px;width:auto;max-width:180px;opacity:.96;flex:0 0 auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));">
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Window Repair • Glass Replacement • Doors</div>
