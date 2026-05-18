@@ -135,6 +135,15 @@ function renderSiteNav() {
           align-self: center;
         }
       }
+
+      .footer-link {
+        transition: all .18s ease;
+      }
+
+      .footer-link:hover {
+        color: #fff !important;
+        transform: translateY(-1px);
+      }
     </style>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
@@ -162,6 +171,140 @@ function renderSiteNav() {
   `;
 }
 
+function renderSiteFooter() {
+  const target = document.getElementById('site-footer');
+  if (!target) return;
+
+  target.innerHTML = `
+    <footer class="py-4 bg-dark text-white-50 border-top border-dark-subtle">
+      <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
+
+        <div class="d-flex align-items-center gap-3 text-center text-lg-start">
+          <img
+            src="images/current_logo.png"
+            alt="Cunningham Windows logo"
+            style="height:72px;width:auto;max-width:180px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));"
+          >
+
+          <div>
+            <div class="fw-semibold text-white">Cunningham Windows</div>
+            <div class="small">Windows • Glass • Doors</div>
+            <div class="small">Corryton & Knoxville, Tennessee</div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="d-flex justify-content-center align-items-center gap-4 mb-2 flex-wrap">
+
+            <a href="${googleReviewUrl}"
+               target="_blank"
+               rel="noopener"
+               class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-google fs-4"></i>
+              <span>Google Reviews</span>
+            </a>
+
+            <a href="${facebookUrl}"
+               target="_blank"
+               rel="noopener"
+               class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-facebook fs-4"></i>
+              <span>Facebook</span>
+            </a>
+
+            <a href="${googleMapsUrl}"
+               target="_blank"
+               rel="noopener"
+               class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill fs-4"></i>
+              <span>Maps</span>
+            </a>
+
+          </div>
+
+          <div class="small">(865) 522-0800</div>
+          <div class="small mt-1">© <span id="year"></span> Cunningham Windows</div>
+        </div>
+
+      </div>
+    </footer>
+  `;
+
+  const year = document.getElementById('year');
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+}
+
+function renderStickyCTA() {
+  if (document.getElementById('sticky-mobile-cta')) return;
+
+  const sticky = document.createElement('div');
+  sticky.id = 'sticky-mobile-cta';
+
+  sticky.innerHTML = `
+    <style>
+      #sticky-mobile-cta {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        display: none;
+      }
+
+      #sticky-mobile-cta .cta-wrap {
+        display: flex;
+        background: rgba(15,23,42,.96);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -10px 20px rgba(0,0,0,.18);
+      }
+
+      #sticky-mobile-cta a {
+        flex: 1;
+        text-align: center;
+        padding: 1rem .5rem;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      #sticky-mobile-cta .call-btn {
+        background: #198754;
+        color: #fff;
+      }
+
+      #sticky-mobile-cta .quote-btn {
+        background: #ff8200;
+        color: #111;
+      }
+
+      @media (max-width: 991px) {
+        #sticky-mobile-cta {
+          display: block;
+        }
+
+        body {
+          padding-bottom: 78px;
+        }
+      }
+    </style>
+
+    <div class="cta-wrap">
+      <a class="call-btn" href="tel:+18655220800">
+        <i class="bi bi-telephone-fill me-1"></i> Call Now
+      </a>
+
+      <a class="quote-btn" href="index.html#contact">
+        <i class="bi bi-chat-dots-fill me-1"></i> Get Quote
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(sticky);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSiteNav();
+  renderSiteFooter();
+  renderStickyCTA();
 });
