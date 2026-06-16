@@ -224,6 +224,15 @@ function renderSiteFooter() {
 
           <div class="small">(865) 522-0800</div>
           <div class="small mt-1">© <span id="year"></span> Cunningham Windows</div>
+          <div class="small mt-1">
+            Built by
+            <a href="https://rockytopdevshop.com"
+               target="_blank"
+               rel="noopener"
+               class="footer-link text-white-50 text-decoration-none">
+              Rock Top Dev Shop
+            </a>
+          </div>
         </div>
 
       </div>
