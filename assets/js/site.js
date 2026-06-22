@@ -190,7 +190,7 @@ function renderSiteFooter() {
           <div>
             <div class="fw-semibold text-white">Cunningham Windows</div>
             <div class="small">Windows • Glass • Doors</div>
-            <div class="small">Corryton & Knoxville, Tennessee</div>
+            <div class="small">Knoxville, Tennessee</div>
           </div>
         </div>
 
@@ -318,3 +318,4 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSiteFooter();
   renderStickyCTA();
 });
+
