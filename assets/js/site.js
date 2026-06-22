@@ -1,5 +1,6 @@
 const sitePages = [
   { href: 'index.html', label: 'Home' },
+  { href: 'about.html', label: 'About Us' },
   { href: 'window-repair-knoxville.html', label: 'Window Repair' },
   { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' },
   { href: 'projects.html', label: 'Projects' },
