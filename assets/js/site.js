@@ -2,10 +2,7 @@ const sitePages = [
   { href: 'index.html', label: 'Home' },
   { href: 'about.html', label: 'About Us' },
   { href: 'window-repair-knoxville.html', label: 'Window Repair' },
-  { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' },
-  { href: 'projects.html', label: 'Projects' },
-  { href: 'index.html#contact', label: 'Contact' },
-  { href: 'resources.html', label: 'Resources' }
+  { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' }
 ];
 
 const googleReviewUrl = 'https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdadE4yTnJaZxgK';
@@ -26,6 +23,9 @@ function isActive(page) {
 function renderSiteNav() {
   const target = document.getElementById('site-nav');
   if (!target) return;
+
+  const current = currentPageName();
+  const projectsActive = current === 'projects.html' || current === 'resources.html';
 
   const links = sitePages.map(page => `
     <li class="nav-item">
@@ -85,6 +85,23 @@ function renderSiteNav() {
 
       .navbar-toggler:focus {
         box-shadow: none;
+      }
+
+      .navbar .dropdown-menu {
+        background: #111827;
+        border: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.24);
+      }
+
+      .navbar .dropdown-item {
+        color: rgba(255,255,255,.78);
+      }
+
+      .navbar .dropdown-item:hover,
+      .navbar .dropdown-item:focus,
+      .navbar .dropdown-item.active {
+        background: rgba(255,130,0,.16);
+        color: #fff;
       }
 
       @media (max-width: 576px) {
@@ -166,6 +183,20 @@ function renderSiteNav() {
         <div id="nav" class="collapse navbar-collapse">
           <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
             ${links}
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle ${projectsActive ? 'active' : ''}" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Projects
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown">
+                <li><a class="dropdown-item ${current === 'projects.html' ? 'active' : ''}" href="projects.html">View Projects</a></li>
+                <li><a class="dropdown-item ${current === 'resources.html' ? 'active' : ''}" href="resources.html">Resources</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
           </ul>
         </div>
       </div>
