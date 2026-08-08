@@ -4,7 +4,8 @@ const sitePages = [
   { href: 'window-repair-knoxville.html', label: 'Window Repair' },
   { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' },
   { href: 'projects.html', label: 'Projects' },
-  { href: 'index.html#contact', label: 'Contact' }
+  { href: 'index.html#contact', label: 'Contact' },
+  { href: 'resources.html', label: 'Resources' }
 ];
 
 const googleReviewUrl = 'https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdadE4yTnJaZxgK';
@@ -318,4 +319,3 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSiteFooter();
   renderStickyCTA();
 });
-
