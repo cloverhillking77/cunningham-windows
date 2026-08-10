@@ -1,4 +1,5 @@
 const GOOGLE_ADS_ID = 'AW-18376780682';
+const GOOGLE_ADS_PHONE_CLICK_DESTINATION = 'AW-18376780682/r7FTCMbji98cEIrX3bpE';
 
 function initGoogleAdsTag() {
   if (window.__cunninghamGoogleAdsInitialized) return;
@@ -17,7 +18,25 @@ function initGoogleAdsTag() {
   }
 }
 
+function trackPhoneClick() {
+  if (typeof window.gtag !== 'function') return;
+  window.gtag('event', 'conversion', {
+    send_to: GOOGLE_ADS_PHONE_CLICK_DESTINATION,
+    value: 10.0,
+    currency: 'USD'
+  });
+}
+
+function initPhoneClickTracking() {
+  document.addEventListener('click', event => {
+    const phoneLink = event.target.closest('a[href^="tel:"]');
+    if (!phoneLink) return;
+    trackPhoneClick();
+  });
+}
+
 initGoogleAdsTag();
+initPhoneClickTracking();
 
 const sitePages = [
   { href: 'index.html', label: 'Home' },
