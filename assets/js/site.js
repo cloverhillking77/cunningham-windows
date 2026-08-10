@@ -1,15 +1,14 @@
 const GOOGLE_ADS_ID = 'AW-18376780682';
 const GOOGLE_ADS_PHONE_CLICK_DESTINATION = 'AW-18376780682/r7FTCMbji98cEIrX3bpE';
 
-function initGoogleAdsTag() {
-  if (window.__cunninghamGoogleAdsInitialized) return;
-  window.__cunninghamGoogleAdsInitialized = true;
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+window.gtag('js', new Date());
+window.gtag('config', GOOGLE_ADS_ID);
 
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
-  window.gtag('js', new Date());
-  window.gtag('config', GOOGLE_ADS_ID);
-
+function loadGoogleAdsLibrary() {
+  if (window.__cunninghamGoogleAdsLibraryLoaded) return;
+  window.__cunninghamGoogleAdsLibraryLoaded = true;
   if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}"]`)) {
     const tag = document.createElement('script');
     tag.async = true;
@@ -18,8 +17,13 @@ function initGoogleAdsTag() {
   }
 }
 
+if ('requestIdleCallback' in window) {
+  window.addEventListener('load', () => requestIdleCallback(loadGoogleAdsLibrary, { timeout: 2500 }), { once: true });
+} else {
+  window.addEventListener('load', () => setTimeout(loadGoogleAdsLibrary, 800), { once: true });
+}
+
 function trackPhoneClick() {
-  if (typeof window.gtag !== 'function') return;
   window.gtag('event', 'conversion', {
     send_to: GOOGLE_ADS_PHONE_CLICK_DESTINATION,
     value: 10.0,
@@ -27,16 +31,10 @@ function trackPhoneClick() {
   });
 }
 
-function initPhoneClickTracking() {
-  document.addEventListener('click', event => {
-    const phoneLink = event.target.closest('a[href^="tel:"]');
-    if (!phoneLink) return;
-    trackPhoneClick();
-  });
-}
-
-initGoogleAdsTag();
-initPhoneClickTracking();
+document.addEventListener('click', event => {
+  const phoneLink = event.target.closest('a[href^="tel:"]');
+  if (phoneLink) trackPhoneClick();
+});
 
 const sitePages = [
   { href: 'index.html', label: 'Home' },
@@ -66,59 +64,22 @@ function renderSiteNav() {
 
   const current = currentPageName();
   const projectsActive = current === 'projects.html' || current === 'resources.html';
-
   const links = sitePages.map(page => `
-    <li class="nav-item">
-      <a class="nav-link ${isActive(page) ? 'active' : ''}" href="${page.href}">${page.label}</a>
-    </li>
+    <li class="nav-item"><a class="nav-link ${isActive(page) ? 'active' : ''}" href="${page.href}">${page.label}</a></li>
   `).join('');
 
   target.innerHTML = `
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap');
-      .cw-brand { text-decoration: none; }
-      .cw-brand-logo { height:160px; width:200px; max-width:300px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 6px 16px rgba(0,0,0,.45)); }
-      .cw-brand-text { display:flex; flex-direction:column; line-height:1; }
-      .cw-brand-title { font-family:'Montserrat',sans-serif; font-size:clamp(1.35rem,2.2vw,2.15rem); font-weight:800; letter-spacing:.02em; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.35); }
-      .cw-brand-sub { font-family:'Montserrat',sans-serif; font-size:.78rem; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.78); margin-top:.28rem; }
-      .navbar-toggler { margin-left:auto; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); padding:.7rem .95rem; border-radius:1rem; }
-      .navbar-toggler:focus { box-shadow:none; }
-      .navbar .dropdown-menu { background:#111827; border:1px solid rgba(255,255,255,.12); box-shadow:0 .75rem 1.5rem rgba(0,0,0,.24); }
-      .navbar .dropdown-item { color:rgba(255,255,255,.78); }
-      .navbar .dropdown-item:hover,.navbar .dropdown-item:focus,.navbar .dropdown-item.active { background:rgba(255,130,0,.16); color:#fff; }
-      @media (max-width:576px) {
-        .navbar { padding-top:.7rem; padding-bottom:.7rem; }
-        .navbar > .container-fluid { display:flex; align-items:center; justify-content:space-between; }
-        .cw-brand { display:flex!important; flex-direction:column!important; align-items:flex-start!important; justify-content:center; gap:.2rem!important; flex:1; min-width:0; }
-        .cw-brand-logo { height:95px; max-width:180px; }
-        .cw-brand-text { padding-left:.15rem; }
-        .cw-brand-title { font-size:1.2rem; line-height:1; white-space:nowrap; }
-        .cw-brand-sub { font-size:.56rem; letter-spacing:.15em; margin-top:.18rem; white-space:nowrap; }
-        .navbar-toggler { margin-left:auto; flex-shrink:0; align-self:center; }
-      }
-      .footer-link { transition:all .18s ease; }
-      .footer-link:hover { color:#fff!important; transform:translateY(-1px); }
+      .cw-brand{text-decoration:none}.cw-brand-logo{height:160px;width:200px;max-width:300px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 6px 16px rgba(0,0,0,.45))}.cw-brand-text{display:flex;flex-direction:column;line-height:1}.cw-brand-title{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:clamp(1.35rem,2.2vw,2.15rem);font-weight:800;letter-spacing:.02em;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.35)}.cw-brand-sub{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:.28rem}.navbar-toggler{margin-left:auto;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);padding:.7rem .95rem;border-radius:1rem}.navbar-toggler:focus{box-shadow:none}.navbar .dropdown-menu{background:#111827;border:1px solid rgba(255,255,255,.12);box-shadow:0 .75rem 1.5rem rgba(0,0,0,.24)}.navbar .dropdown-item{color:rgba(255,255,255,.78)}.navbar .dropdown-item:hover,.navbar .dropdown-item:focus,.navbar .dropdown-item.active{background:rgba(255,130,0,.16);color:#fff}@media(max-width:576px){.navbar{padding-top:.7rem;padding-bottom:.7rem}.navbar>.container-fluid{display:flex;align-items:center;justify-content:space-between}.cw-brand{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center;gap:.2rem!important;flex:1;min-width:0}.cw-brand-logo{height:95px;max-width:180px}.cw-brand-text{padding-left:.15rem}.cw-brand-title{font-size:1.2rem;line-height:1;white-space:nowrap}.cw-brand-sub{font-size:.56rem;letter-spacing:.15em;margin-top:.18rem;white-space:nowrap}.navbar-toggler{margin-left:auto;flex-shrink:0;align-self:center}}.footer-link{transition:all .18s ease}.footer-link:hover{color:#fff!important;transform:translateY(-1px)}
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
       <div class="container-fluid px-lg-4">
         <a class="navbar-brand d-flex align-items-center gap-4 cw-brand" href="index.html" aria-label="Cunningham Windows home">
-          <img class="cw-brand-logo" src="images/current_logo.png" alt="Cunningham Windows logo">
+          <img class="cw-brand-logo" src="images/cunninghamwindows_newlogo_transparent.png" width="200" height="160" fetchpriority="high" decoding="async" alt="Cunningham Windows logo">
           <div class="cw-brand-text"><span class="cw-brand-title">Cunningham Windows</span><span class="cw-brand-sub">Windows • Glass • Doors</span></div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div id="nav" class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-            ${links}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle ${projectsActive ? 'active' : ''}" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown">
-                <li><a class="dropdown-item ${current === 'projects.html' ? 'active' : ''}" href="projects.html">View Projects</a></li>
-                <li><a class="dropdown-item ${current === 'resources.html' ? 'active' : ''}" href="resources.html">Resources</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link ${current === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a></li>
-          </ul>
-        </div>
+        <div id="nav" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">${links}<li class="nav-item dropdown"><a class="nav-link dropdown-toggle ${projectsActive ? 'active' : ''}" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown"><li><a class="dropdown-item ${current === 'projects.html' ? 'active' : ''}" href="projects.html">View Projects</a></li><li><a class="dropdown-item ${current === 'resources.html' ? 'active' : ''}" href="resources.html">Resources</a></li></ul></li><li class="nav-item"><a class="nav-link ${current === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a></li></ul></div>
       </div>
     </nav>`;
 }
@@ -129,20 +90,8 @@ function renderSiteFooter() {
   target.innerHTML = `
     <footer class="py-4 bg-dark text-white-50 border-top border-dark-subtle">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
-        <div class="d-flex align-items-center gap-3 text-center text-lg-start">
-          <img src="images/current_logo.png" alt="Cunningham Windows logo" style="height:72px;width:auto;max-width:180px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));">
-          <div><div class="fw-semibold text-white">Cunningham Windows</div><div class="small">Windows • Glass • Doors</div><div class="small">Knoxville, Tennessee</div></div>
-        </div>
-        <div class="text-center">
-          <div class="d-flex justify-content-center align-items-center gap-4 mb-2 flex-wrap">
-            <a href="${googleReviewUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-google fs-4"></i><span>Google Reviews</span></a>
-            <a href="${facebookUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-facebook fs-4"></i><span>Facebook</span></a>
-            <a href="${googleMapsUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-geo-alt-fill fs-4"></i><span>Maps</span></a>
-          </div>
-          <div class="small">(865) 522-0800</div>
-          <div class="small mt-1">© <span id="year"></span> Cunningham Windows</div>
-          <div class="small mt-1">Built by <a href="https://rockytopdevshop.com" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none">Rock Top Dev Shop</a></div>
-        </div>
+        <div class="d-flex align-items-center gap-3 text-center text-lg-start"><img src="images/cunninghamwindows_newlogo_transparent.png" width="180" height="72" loading="lazy" decoding="async" alt="Cunningham Windows logo" style="height:72px;width:auto;max-width:180px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));"><div><div class="fw-semibold text-white">Cunningham Windows</div><div class="small">Windows • Glass • Doors</div><div class="small">Knoxville, Tennessee</div></div></div>
+        <div class="text-center"><div class="d-flex justify-content-center align-items-center gap-4 mb-2 flex-wrap"><a href="${googleReviewUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-google fs-4"></i><span>Google Reviews</span></a><a href="${facebookUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-facebook fs-4"></i><span>Facebook</span></a><a href="${googleMapsUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-geo-alt-fill fs-4"></i><span>Maps</span></a></div><div class="small">(865) 522-0800</div><div class="small mt-1">© <span id="year"></span> Cunningham Windows</div><div class="small mt-1">Built by <a href="https://rockytopdevshop.com" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none">Rock Top Dev Shop</a></div></div>
       </div>
     </footer>`;
   const year = document.getElementById('year');
@@ -153,17 +102,35 @@ function renderStickyCTA() {
   if (document.getElementById('sticky-mobile-cta')) return;
   const sticky = document.createElement('div');
   sticky.id = 'sticky-mobile-cta';
-  sticky.innerHTML = `
-    <style>
-      #sticky-mobile-cta{position:fixed;bottom:0;left:0;width:100%;z-index:1050;display:none}
-      #sticky-mobile-cta .cta-wrap{display:flex;background:rgba(15,23,42,.96);backdrop-filter:blur(10px);box-shadow:0 -10px 20px rgba(0,0,0,.18)}
-      #sticky-mobile-cta a{flex:1;text-align:center;padding:1rem .5rem;text-decoration:none;font-weight:700}
-      #sticky-mobile-cta .call-btn{background:#198754;color:#fff}
-      #sticky-mobile-cta .quote-btn{background:#ff8200;color:#111}
-      @media (max-width:991px){#sticky-mobile-cta{display:block}body{padding-bottom:78px}}
-    </style>
-    <div class="cta-wrap"><a class="call-btn" href="tel:+18655220800"><i class="bi bi-telephone-fill me-1"></i> Call Now</a><a class="quote-btn" href="contact.html"><i class="bi bi-chat-dots-fill me-1"></i> Get Quote</a></div>`;
+  sticky.innerHTML = `<style>#sticky-mobile-cta{position:fixed;bottom:0;left:0;width:100%;z-index:1050;display:none}#sticky-mobile-cta .cta-wrap{display:flex;background:rgba(15,23,42,.96);backdrop-filter:blur(10px);box-shadow:0 -10px 20px rgba(0,0,0,.18)}#sticky-mobile-cta a{flex:1;text-align:center;padding:1rem .5rem;text-decoration:none;font-weight:700}#sticky-mobile-cta .call-btn{background:#198754;color:#fff}#sticky-mobile-cta .quote-btn{background:#ff8200;color:#111}@media(max-width:991px){#sticky-mobile-cta{display:block}body{padding-bottom:78px}}</style><div class="cta-wrap"><a class="call-btn" href="tel:+18655220800"><i class="bi bi-telephone-fill me-1"></i> Call Now</a><a class="quote-btn" href="contact.html"><i class="bi bi-chat-dots-fill me-1"></i> Get Quote</a></div>`;
   document.body.appendChild(sticky);
 }
 
-document.addEventListener('DOMContentLoaded', () => { renderSiteNav(); renderSiteFooter(); renderStickyCTA(); });
+function initDeferredMedia() {
+  const targets = document.querySelectorAll('[data-defer-bg], img[data-src]');
+  if (!targets.length) return;
+  const reveal = el => {
+    if (el.dataset.deferBg !== undefined) el.classList.add('bg-loaded');
+    if (el.tagName === 'IMG' && el.dataset.src) {
+      el.src = el.dataset.src;
+      el.removeAttribute('data-src');
+    }
+  };
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(reveal);
+    return;
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      reveal(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '350px 0px' });
+  targets.forEach(el => observer.observe(el));
+}
+
+renderSiteNav();
+renderSiteFooter();
+renderStickyCTA();
+initDeferredMedia();
