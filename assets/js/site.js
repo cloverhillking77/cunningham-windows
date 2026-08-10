@@ -1,3 +1,24 @@
+const GOOGLE_ADS_ID = 'AW-18376780682';
+
+function initGoogleAdsTag() {
+  if (window.__cunninghamGoogleAdsInitialized) return;
+  window.__cunninghamGoogleAdsInitialized = true;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GOOGLE_ADS_ID);
+
+  if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}"]`)) {
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`;
+    document.head.appendChild(tag);
+  }
+}
+
+initGoogleAdsTag();
+
 const sitePages = [
   { href: 'index.html', label: 'Home' },
   { href: 'about.html', label: 'About Us' },
