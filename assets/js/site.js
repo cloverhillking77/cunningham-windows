@@ -75,7 +75,7 @@ function renderSiteNav() {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-dark-subtle">
       <div class="container-fluid px-lg-4">
         <a class="navbar-brand d-flex align-items-center gap-4 cw-brand" href="index.html" aria-label="Cunningham Windows home">
-          <img class="cw-brand-logo" src="images/cunninghamwindows_newlogo_transparent.png" width="200" height="160" fetchpriority="high" decoding="async" alt="Cunningham Windows logo">
+          <img class="cw-brand-logo" src="images/current_logo.png" width="200" height="160" fetchpriority="high" decoding="async" alt="Cunningham Windows logo">
           <div class="cw-brand-text"><span class="cw-brand-title">Cunningham Windows</span><span class="cw-brand-sub">Windows • Glass • Doors</span></div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -90,7 +90,7 @@ function renderSiteFooter() {
   target.innerHTML = `
     <footer class="py-4 bg-dark text-white-50 border-top border-dark-subtle">
       <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
-        <div class="d-flex align-items-center gap-3 text-center text-lg-start"><img src="images/cunninghamwindows_newlogo_transparent.png" width="180" height="72" loading="lazy" decoding="async" alt="Cunningham Windows logo" style="height:72px;width:auto;max-width:180px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));"><div><div class="fw-semibold text-white">Cunningham Windows</div><div class="small">Windows • Glass • Doors</div><div class="small">Knoxville, Tennessee</div></div></div>
+        <div class="d-flex align-items-center gap-3 text-center text-lg-start"><img src="images/current_logo.png" width="180" height="72" loading="lazy" decoding="async" alt="Cunningham Windows logo" style="height:72px;width:auto;max-width:180px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));"><div><div class="fw-semibold text-white">Cunningham Windows</div><div class="small">Windows • Glass • Doors</div><div class="small">Knoxville, Tennessee</div></div></div>
         <div class="text-center"><div class="d-flex justify-content-center align-items-center gap-4 mb-2 flex-wrap"><a href="${googleReviewUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-google fs-4"></i><span>Google Reviews</span></a><a href="${facebookUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-facebook fs-4"></i><span>Facebook</span></a><a href="${googleMapsUrl}" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none d-flex align-items-center gap-2"><i class="bi bi-geo-alt-fill fs-4"></i><span>Maps</span></a></div><div class="small">(865) 522-0800</div><div class="small mt-1">© <span id="year"></span> Cunningham Windows</div><div class="small mt-1">Built by <a href="https://rockytopdevshop.com" target="_blank" rel="noopener" class="footer-link text-white-50 text-decoration-none">Rock Top Dev Shop</a></div></div>
       </div>
     </footer>`;
