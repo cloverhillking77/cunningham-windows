@@ -1,0 +1,50 @@
+name: Reorder Cunningham About menu
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reorder-about-menu.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reorder-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Move About Us after Projects
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('assets/js/site.js')
+          text = path.read_text()
+          old = """const sitePages = [
+            { href: 'index.html', label: 'Home' },
+            { href: 'about.html', label: 'About Us' }
+          ];"""
+          new = """const sitePages = [
+            { href: 'index.html', label: 'Home' }
+          ];"""
+          if old not in text:
+              raise SystemExit('Expected sitePages block not found.')
+          text = text.replace(old, new, 1)
+          marker = """</ul></li><li class=\"nav-item\"><a class=\"nav-link ${current === 'contact.html' ? 'active' : ''}\" href=\"contact.html\">Contact</a></li>"""
+          replacement = """</ul></li><li class=\"nav-item\"><a class=\"nav-link ${current === 'about.html' ? 'active' : ''}\" href=\"about.html\">About Us</a></li><li class=\"nav-item\"><a class=\"nav-link ${current === 'contact.html' ? 'active' : ''}\" href=\"contact.html\">Contact</a></li>"""
+          if marker not in text:
+              raise SystemExit('Expected Projects-to-Contact marker not found.')
+          text = text.replace(marker, replacement, 1)
+          path.write_text(text)
+      - name: Commit menu reorder
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/site.js
+          git commit -m "Move About Us after Projects"
+          git push
