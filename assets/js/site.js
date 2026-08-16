@@ -37,8 +37,7 @@ document.addEventListener('click', event => {
 });
 
 const sitePages = [
-  { href: 'index.html', label: 'Home' },
-  { href: 'about.html', label: 'About Us' }
+  { href: 'index.html', label: 'Home' }
 ];
 
 const servicePages = [
@@ -84,7 +83,7 @@ function renderSiteNav() {
           <div class="cw-brand-text"><span class="cw-brand-title">Cunningham Windows</span><span class="cw-brand-sub">Windows • Glass • Doors</span></div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div id="nav" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">${links}<li class="nav-item dropdown"><a class="nav-link dropdown-toggle ${servicesActive ? 'active' : ''}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby="servicesDropdown">${servicePages.map(page => `<li><a class="dropdown-item ${current === page.href ? 'active' : ''}" href="${page.href}">${page.label}</a></li>`).join('')}</ul></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle ${projectsActive ? 'active' : ''}" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown"><li><a class="dropdown-item ${current === 'projects.html' ? 'active' : ''}" href="projects.html">View Projects</a></li><li><a class="dropdown-item ${current === 'resources.html' ? 'active' : ''}" href="resources.html">Resources</a></li></ul></li><li class="nav-item"><a class="nav-link ${current === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a></li></ul></div>
+        <div id="nav" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">${links}<li class="nav-item dropdown"><a class="nav-link dropdown-toggle ${servicesActive ? 'active' : ''}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby="servicesDropdown">${servicePages.map(page => `<li><a class="dropdown-item ${current === page.href ? 'active' : ''}" href="${page.href}">${page.label}</a></li>`).join('')}</ul></li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle ${projectsActive ? 'active' : ''}" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a><ul class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsDropdown"><li><a class="dropdown-item ${current === 'projects.html' ? 'active' : ''}" href="projects.html">View Projects</a></li><li><a class="dropdown-item ${current === 'resources.html' ? 'active' : ''}" href="resources.html">Resources</a></li></ul></li><li class="nav-item"><a class="nav-link ${current === 'about.html' ? 'active' : ''}" href="about.html">About Us</a></li><li class="nav-item"><a class="nav-link ${current === 'contact.html' ? 'active' : ''}" href="contact.html">Contact</a></li></ul></div>
       </div>
     </nav>`;
 }
