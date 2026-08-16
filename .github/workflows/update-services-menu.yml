@@ -1,0 +1,72 @@
+name: Update Cunningham services menu
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-services-menu.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Group service pages under Services dropdown
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('assets/js/site.js')
+          text = path.read_text()
+
+          old_pages = """const sitePages = [
+            { href: 'index.html', label: 'Home' },
+            { href: 'about.html', label: 'About Us' },
+            { href: 'window-repair-knoxville.html', label: 'Window Repair' },
+            { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' }
+          ];"""
+          new_pages = """const sitePages = [
+            { href: 'index.html', label: 'Home' },
+            { href: 'about.html', label: 'About Us' }
+          ];
+
+          const servicePages = [
+            { href: 'replacement-windows-knoxville.html', label: 'Replacement Windows' },
+            { href: 'window-repair-knoxville.html', label: 'Window Repair' },
+            { href: 'glass-replacement-knoxville.html', label: 'Glass Replacement' }
+          ];"""
+
+          old_active = """  const current = currentPageName();
+            const projectsActive = current === 'projects.html' || current === 'resources.html';"""
+          new_active = """  const current = currentPageName();
+            const servicesActive = servicePages.some(page => current === page.href);
+            const projectsActive = current === 'projects.html' || current === 'resources.html';"""
+
+          old_nav = """<div id=\"nav\" class=\"collapse navbar-collapse\"><ul class=\"navbar-nav ms-auto align-items-lg-center gap-lg-1\">${links}<li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle ${projectsActive ? 'active' : ''}\" href=\"#\" id=\"projectsDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">Projects</a>"""
+          new_nav = """<div id=\"nav\" class=\"collapse navbar-collapse\"><ul class=\"navbar-nav ms-auto align-items-lg-center gap-lg-1\">${links}<li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle ${servicesActive ? 'active' : ''}\" href=\"#\" id=\"servicesDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">Services</a><ul class=\"dropdown-menu dropdown-menu-end\" aria-labelledby=\"servicesDropdown\">${servicePages.map(page => `<li><a class=\"dropdown-item ${current === page.href ? 'active' : ''}\" href=\"${page.href}\">${page.label}</a></li>`).join('')}</ul></li><li class=\"nav-item dropdown\"><a class=\"nav-link dropdown-toggle ${projectsActive ? 'active' : ''}\" href=\"#\" id=\"projectsDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">Projects</a>"""
+
+          for old, new, label in [
+              (old_pages, new_pages, 'sitePages'),
+              (old_active, new_active, 'active-state block'),
+              (old_nav, new_nav, 'nav markup'),
+          ]:
+              if old not in text:
+                  raise SystemExit(f'Expected {label} pattern not found; no changes written.')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text)
+      - name: Commit menu update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/site.js
+          git commit -m "Group service pages under Services menu"
+          git push
