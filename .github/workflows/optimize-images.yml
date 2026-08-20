@@ -1,0 +1,99 @@
+name: Optimize Cunningham images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/optimize-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Resize and compress large images in place
+        shell: python
+        run: |
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          root = Path('images')
+          changed = []
+
+          # More aggressive cap for the logo because it is rendered at only ~200px wide.
+          special_max = {
+              Path('images/current_logo.png'): 600,
+              Path('images/knoxville-home-background.jpg'): 1920,
+              Path('images/window_hero.jpg'): 1920,
+              Path('images/projects/doorsMain.png'): 1600,
+          }
+
+          for path in root.rglob('*'):
+              if not path.is_file() or path.suffix.lower() not in {'.jpg', '.jpeg', '.png'}:
+                  continue
+
+              original_size = path.stat().st_size
+              # Skip already-small files unless they are one of our key assets.
+              if original_size < 500_000 and path not in special_max:
+                  continue
+
+              try:
+                  with Image.open(path) as im:
+                      im = ImageOps.exif_transpose(im)
+                      max_dim = special_max.get(path, 1800)
+                      w, h = im.size
+                      scale = min(1.0, max_dim / max(w, h))
+                      if scale < 1.0:
+                          im = im.resize((round(w * scale), round(h * scale)), Image.Resampling.LANCZOS)
+
+                      suffix = path.suffix.lower()
+                      if suffix in {'.jpg', '.jpeg'}:
+                          if im.mode not in ('RGB', 'L'):
+                              im = im.convert('RGB')
+                          im.save(path, format='JPEG', quality=80, optimize=True, progressive=True)
+                      else:
+                          # Preserve alpha for logos and PNG artwork.
+                          if im.mode not in ('RGB', 'RGBA', 'L', 'LA', 'P'):
+                              im = im.convert('RGBA')
+                          im.save(path, format='PNG', optimize=True, compress_level=9)
+
+                  new_size = path.stat().st_size
+                  if new_size < original_size:
+                      changed.append((str(path), original_size, new_size))
+                  else:
+                      # Do not keep a larger recompressed asset.
+                      git_blob = None
+              except Exception as exc:
+                  print(f'Skipped {path}: {exc}')
+
+          print('\nOptimized assets:')
+          for name, before, after in changed:
+              print(f'{name}: {before/1024:.0f} KB -> {after/1024:.0f} KB ({(1-after/before)*100:.1f}% smaller)')
+
+      - name: Commit optimized images
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- images; then
+            echo "No image changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images
+          git commit -m "Optimize large site images for faster loading"
+          git push
